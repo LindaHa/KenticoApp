@@ -1,0 +1,112 @@
+﻿<div data-role="page" id="authorization-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#menu-page" class="ui-btn">Menu</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Roles</a></li>
+			</ul>
+		</div>
+		<div class="push-down">
+			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h1>Authorization</h1>
+		<table data-role="table" class="two-side-table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="td-first">Administrator</td>
+					<td class="td-second.special">
+						<a href="#viewRole-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-eye ui-btn-icon-left pull-right ui-mini">View</a><br>
+					</td>
+					<td class="td-third">
+						<a href="#deleteRole-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext pull-right ui-mini">Delete Role</a><br>
+						<div data-role="popup" id="deleteRole-popup">
+							<h2>Are you sure you want to delete this Role?</h2>
+							<a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
+							<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
+						</div>
+				</tr>				
+			</tbody>
+		</table>
+
+		<div id="error-msg" class="not-displayed">
+		</div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">
+			<a href="#" class="above-full-width ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add Role</a>
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+</div>
+
+
+<div data-role="page" id="viewRole-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#menu-page" class="ui-btn">Menu</a></li>
+				<li><a href="#authorization-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Roles</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Edit Role</a></li>
+
+			</ul>
+		</div>
+		<div class="push-down">
+			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h1>Permissions</h1>
+		<table data-role="table" class="two-side-table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="td-first">restart system</td>
+					<td class="td-second">
+						<a href="#removePermission-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext pull-right ui-mini">Remove Permission</a><br>
+						<div data-role="popup" id="removePermission-popup">
+							<h2>Are you sure you want to remove this permission?</h2>
+							<a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
+							<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+			<div id="error-msg" class="not-displayed">
+			</div>
+</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">				
+				<a href="#" id="addPermissino-btn" class="ui-btn ui-icon-plus ui-btn-icon-left above-full-width ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add permission</a>			
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+</div>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--
+		Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+		For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+	-->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>KenticoApp</title>
+</head>
+<body>
+	<div class="app">
+		<h1>Kentico</h1>
+	</div>
+	<div data-role="page" id="welcome-page">
+
+		<div data-role="header" class="header">
+			<h1 id="app-title">Administration App</h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<a data-position-to="window">
+				<img src="Kentico_logo.png" id="kentico_logo" alt="kentico_logo" style="width:280px">
+			</a>
+			<form class="push-down">
+				<label for="usrname">Username:</label>
+				<input id="usrname-input" name="usrname" placeholder="Username" required />
+				<label for="passwrd">Password:</label>
+				<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
+				<button id="login-btn" data-role="button" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Log in</button>
+			</form>
+
+			<div>
+				<a href="#">Forgot Password</a>
+				<a id="register-btn" class="pull-right" href="#">Register</a>
+			</div>
+
+			<div id="error-msg" class="not-displayed">
+			</div>
+		</div>
+
+		<footer data-role="footer" data-position="fixed">
+			<a href="#menu-page" class="ui-btn">menu</a>
+			<a href="#system-page" class="ui-btn">system</a>
+			<a href="#users-page" class="ui-btn">users</a>
+			<a href="#editUser-page" class="ui-btn">editUser</a>
+			<a href="#authorization-page" class="ui-btn">athorization</a>
+
+			<h4>Kentico</h4>
+		</footer>
+
+	</div>
+
+	<div data-role="page" id="menu-page" <!--style="display:none-->">
+		<div data-role="header" class="header">
+			<h1 id="app-title">Administration App</h1>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#" class="ui-btn ui-btn-active">Menu</a></li>
+				</ul>
+			</div>
+			<div class="push-down">
+				<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+					<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+					<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+				</div>
+				<div data-role="popup" id="logout-popup">
+					<h2>Are you sure you want to log out?</h2>
+					<a href="#welcome-page" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
+					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
+				</div>
+			</div>
+		</div>
+
+		<div role="main" class="ui-content">
+			<div>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#system-page" id="system-btn" class="ui-btn ui-shadow ui-corner-all">System</a>
+					<a href="#systemInfo-popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">System</a>
+					<div data-role="popup" id="systemInfo-popup">
+						<p>To view general system information, the event log, to restart the system, clear unused memory and cache memory.</p>
+					</div>
+				</div>
+
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#authorization-page" id="authorization-btn" class="ui-btn ui-btn-inline ui-shadow ui-corner-all">Authorization</a>
+					<a href="#authorizationInfo-popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Authentication</a>
+					<div data-role="popup" id="authorizationInfo-popup">
+						<p>To edit and add roles</p>
+					</div>
+				</div>
+
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#users-page" id="usrs-btn" class="ui-btn ui-btn-inline ui-shadow ui-corner-all">Users</a>
+					<a href="#usrsInfo-popup" data-rel="popup" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Users</a>
+					<div data-role="popup" id="usrsInfo-popup">
+						<p>To edit and add users</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="error-msg" class="not-displayed">
+			</div>
+		</div>
+
+		<footer data-role="footer" data-position="fixed">
+			<h4>Kentico</h4>
+		</footer>
+	</div>
+
+
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+	<script src="scripts/jquery-1.11.3.min.js"></script>
+	<script src="scripts/jquery.mobile-1.4.5.js"></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+</body>
+</html>

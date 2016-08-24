@@ -1,0 +1,208 @@
+﻿<div data-role="page" id="users-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#menu-page" class="ui-btn">Menu</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Users</a></li>
+			</ul>
+		</div>
+		<div class="push-down">
+			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h1>Users</h1>
+		<table data-role="table" class="two-side-table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>				
+				<tr>
+					<td class="td-first">Antonio Moreno Taqueria</td>
+					<td class="td-second">
+						<a href="#editUser-page" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a><br>
+					</td>
+				</tr>
+			</tbody>
+		</table>		
+
+		<div id="error-msg" class="not-displayed">
+		</div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">
+			<!--<a href="#" class="above-full-width ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add User</a>-->
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+
+</div>
+
+
+
+<div data-role="page" id="editUser-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#menu-page" class="ui-btn">Menu</a></li>
+				<li><a href="#users-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Users</a></li>
+				<li><a href="#editUser-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Edit</a></li>
+
+			</ul>
+		</div>
+		<div class="push-down">
+			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h1>Edit User</h1>
+		<div>
+			<form class="push-down">
+				<div class="ui-field-contain">
+					<label for="NameEdit">First Name:</label>
+					<input id="NameEdit-input" name="firstName" placeholder="name" required />
+					<label for="SurnameEdit">Surname:</label>
+					<input id="SurnameEdit-input" name="Surname" placeholder="surname" required />
+					<label for="passwrdEdit">Password:</label>
+					<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
+					<label for="usrnameEdit">Username:</label>
+					<input id="usrnameEdit-input" name="usrname" placeholder="Username" required"/>
+					<div data-role="collapsible">
+						<h1>Roles:</h1>
+						<table data-role="table" class="two-side-table">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="td-first">Customer</td>
+									<td class="td-second">
+										<a href="#removeRole-popup" data-rel="popup" id="deletRole-btn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline pull-right ui-mini">-</a><br>
+										<div data-role="popup" id="removeRole-popup">
+											<h2>Are you sure you want to remove this role?</h2>
+											<a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
+											<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</form>			
+		</div>
+
+		<div id="error-msg" class="not-displayed">
+		</div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">
+			<div class="above-full-width">
+				<button id="saveEditUser-btn" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow" style="font-weight:bold">Save Changes</button>
+				<a href="#" id="cancelEditUser-btn" class="pull-right ui-icon-delete ui-btn-icon-left ui-btn ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Cancel</a>
+			</div>
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+</div>
+
+
+
+<div data-role="page" id="userView-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>		
+		<div style="padding-top:15px;padding-bottom:1px;">		
+			<a href="#" data-rel="back" class="ui-btn ui-icon-back ui-btn-inline ui-corner-all ui-btn-icon-notext">Back</a>
+			<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left pull-right">Log out</a>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">		
+		<h1>Hello User</h1>		
+		<div>
+			<form class="push-down">
+				<div class="ui-field-contain">
+					<label for="NameEdit">First Name:</label>
+					<input id="NameEdit-input" name="firstName" placeholder="name" required />
+					<label for="SurnameEdit">Surname:</label>
+					<input id="SurnameEdit-input" name="Surname" placeholder="surname" required />
+					<label for="passwrdEdit">Password:</label>
+					<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
+					<label for="usrnameEdit">Username:</label>
+					<input id="usrnameEdit-input" name="usrname" placeholder="Username" required />
+				</div>
+			</form>
+		</div>
+
+		<div id="error-msg" class="not-displayed">
+		</div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">
+			<a href="#" id="saveEdit-btn" class="above-full-width ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Save Changes</a>
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+</div>
+
+
+
+<div data-role="page" id="addUser-page">
+	<div data-role="header" class="header">
+		<h1 id="app-title">Administration App</h1>
+		<div class="push-down">
+			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+			</div>
+		</div>
+	</div>
+
+	<div role="main" class="ui-content">
+		<h1>Add User</h1>
+		<a href="#" data-rel="back" class="ui-btn ui-icon-back ui-btn-inline ui-corner-all ui-btn-icon-notext">Back</a>
+		<div>
+			<form class="push-down">
+				<div class="ui-field-contain">
+					<label for="NameEdit">First Name:</label>
+					<input id="NameEdit-input" name="firstName" placeholder="name" required />
+					<label for="SurnameEdit">Surname:</label>
+					<input id="SurnameEdit-input" name="Surname" placeholder="surname" required />
+					<label for="passwrdEdit">Password:</label>
+					<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
+					<label for="usrnameEdit">Username:</label>
+					<input id="usrnameEdit-input" name="usrname" placeholder="Username" required />
+				</div>
+			</form>
+		</div>
+
+		<div id="error-msg" class="not-displayed">
+		</div>
+	</div>
+
+	<footer data-role="footer" data-position="fixed">
+		<div class="wrapper">
+			<a href="#" id="saveEdit-btn" class="above-full-width ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Save Changes</a>
+		</div>
+		<h4>Kentico</h4>
+	</footer>
+</div>
