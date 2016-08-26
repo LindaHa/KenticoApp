@@ -4,9 +4,9 @@
 	<!--
 		Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
 		For details, see http://go.microsoft.com/fwlink/?LinkID=617521
-	-->
+	
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-
+-->
 	<meta name="format-detection" content="telephone=no">
 	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -114,11 +114,17 @@
 		</footer>
 	</div>
 
+    <div data-role="popup" id="error-popup">
+        <h2 id="errorPopup-text">Text</h2>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-inline">Ok</a>
+    </div>
 
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 	<script src="scripts/jquery-1.11.3.min.js"></script>
 	<script src="scripts/jquery.mobile-1.4.5.js"></script>
 	<script type="text/javascript" src="scripts/index.js"></script>
+    <script type="text/javascript" src="scripts/helpers.js"></script>
+    <script type="text/javascript" src="scripts/systemApiCalls.js"></script>
 </body>
 </html>

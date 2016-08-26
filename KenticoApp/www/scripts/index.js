@@ -1,42 +1,39 @@
-﻿// For an introduction to the Blank template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkID=397704
-// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints, 
-// and then run "window.location.reload()" in the JavaScript Console.
-(function () {
-    "use strict";
+﻿"use strict";
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
-    function onDeviceReady() {
-        // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
+function onDeviceReady() {
+
+    console.log('Ready');
+    // Handle the Cordova pause and resume events
+    document.addEventListener( 'pause', onPause.bind( this ), false );
+    document.addEventListener( 'resume', onResume.bind( this ), false );
         
-        //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        $(document).ready(function () {
-            $.get("systemPages.html", function (data) {
-                $("body").append(data);
+    //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
+    $(document).ready(function () {
+        $.get("systemPages.html", function (data) {
+            $("body").append(data);
+
+            $('#restartServerYes-btn').on('click', function () {
+                restartServerApiCall();
             });
         });
-
-        $(document).ready(function () {
-            $.get("usrsPages.html", function (data) {
-                $("body").append(data);
-            });
+        $.get("usrsPages.html", function (data) {
+            $("body").append(data);
         });
-
-        $(document).ready(function () {
-            $.get("authorizationPages.html", function (data) {
-                $("body").append(data);
-            });
+        $.get("authorizationPages.html", function (data) {
+            $("body").append(data);
         });
-    };
+        
+        //instantiate all global popups from index.html
+        $('#error-popup').enhanceWithin().popup();
+    });
+};
 
-    function onPause() {
-        // TODO: This application has been suspended. Save application state here.
-    };
+function onPause() {
+    // TODO: This application has been suspended. Save application state here.
+};
 
-    function onResume() {
-        // TODO: This application has been reactivated. Restore application state here.
-    };
-} )();
+function onResume() {
+    // TODO: This application has been reactivated. Restore application state here.
+};
