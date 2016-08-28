@@ -1,6 +1,6 @@
 KenticoApp
 =======================
-hybrid mobile application based on Apache Cordova
+hybrid mobile application based on Apache Cordova and jQuery Mobile
 
 Supported Platforms
 =======================
