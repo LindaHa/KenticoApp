@@ -17,3 +17,8 @@ function showAjaxError(jqXHR) {
     $('#error-popup').popup('open');
     $('#errorPopup-text').text(jqXHR.responseJSON.errorMessage);
 }
+
+function showTextPopup(text) {
+    $('#text-popup').popup('open');
+    $('#textPopup-text').text(text);
+}

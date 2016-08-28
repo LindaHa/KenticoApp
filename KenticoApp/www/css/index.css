@@ -186,3 +186,17 @@ tr:nth-child(even) {
   display: block;
   margin: 0 auto;
 }
+
+.my-custom-popup{
+    background-color: #f6f6f6;
+    color:#333;
+    margin-left:auto;
+    font-size: 14px;
+    text-shadow:none;
+}
+.my-custom-popup a{
+    color:#333;
+}
+.my-custom-popup .ui-btn{
+    border-radius:5px;
+}

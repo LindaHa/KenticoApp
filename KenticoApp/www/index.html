@@ -70,11 +70,6 @@
 					<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
 					<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 				</div>
-				<div data-role="popup" id="logout-popup">
-					<h2>Are you sure you want to log out?</h2>
-					<a href="#welcome-page" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
-					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
-				</div>
 			</div>
 		</div>
 
@@ -114,9 +109,19 @@
 		</footer>
 	</div>
 
-    <div data-role="popup" id="error-popup">
+
+    <div data-role="popup" id="error-popup" class="my-custom-popup">
         <h2 id="errorPopup-text">Text</h2>
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-inline">Ok</a>
+    </div>
+    <div data-role="popup" id="text-popup" class="my-custom-popup">
+        <p id="textPopup-text">Text</p>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-inline">Ok</a>
+    </div>
+    <div data-role="popup" id="logout-popup" class="my-custom-popup">
+        <h2>Are you sure you want to log out?</h2>
+        <a href="#welcome-page" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
     </div>
 
 	<script type="text/javascript" src="cordova.js"></script>

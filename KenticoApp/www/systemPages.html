@@ -24,8 +24,8 @@
 			<div class="ui-block-b pull-right">
 				<a href="#clearCache-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Cache</a><br>
 				<a href="#clearMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Unused Memory</a><br>
-				<a href="#" class="ui-btn ui-corner-all ui-shadow">Eventlog</a><br>
-				<a href="#restartServer-popup" id="restartServer-btn" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Restart Server</a><br>
+				<a href="#systemEventlog-page" class="showEventlog-btn ui-btn ui-corner-all ui-shadow">Eventlog</a><br>
+				<a href="#restartServer-popup" data-rel="popup" class="restartServer-btn ui-btn ui-corner-all ui-shadow">Restart Server</a><br>
 			</div>
 		</div>
 
@@ -38,7 +38,7 @@
 				<a href="#clearCache-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Cache</a><br>
 				<div data-role="popup" id="clearCache-popup" data-dismissible="false">
 					<h2>Are you sure you want to clear cache?</h2>
-					<a href="#" class="ui-btn  ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
+					<a href="#" id="clearCacheYes-btn" class="ui-btn  ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
 					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
 				</div>
 
@@ -49,9 +49,9 @@
 					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline ui-corner-all pull-right">No</a>
 				</div>
 
-				<a href="#" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Eventlog</a><br>
+				<a href="#systemEventlog-page" class="showEventlog-btn ui-btn ui-corner-all ui-shadow">Eventlog</a><br>
 
-				<a href="#restartServer-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Restart Server</a><br>
+				<a href="#restartServer-popup" data-rel="popup" class="restartServer-btn ui-btn ui-corner-all ui-shadow">Restart Server</a><br>
 				<div data-role="popup" id="restartServer-popup">
 					<h2>Are you sure you want to restart the server?</h2>
 					<a href="#" id="restartServerYes-btn" class="ui-btn ui-btn-icon-left ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
@@ -68,4 +68,47 @@
 		<h4>Kentico</h4>
 	</footer>
 
+</div>
+
+
+<div data-role="page" id="systemEventlog-page">
+    <div data-role="header" class="header">
+        <h1 id="app-title">Administration App</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#menu-page" class="ui-btn">Menu</a></li>
+                <li><a href="#system-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">System</a></li>
+                <li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Eventlog</a></li>
+            </ul>
+        </div>
+        <div class="push-down">
+            <div data-role="controlgroup" data-type="horizontal" class="pull-right">
+                <a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+                <a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+            </div>
+        </div>
+    </div>
+
+    <div role="main" class="ui-content">
+        <h1>Eventlog - the last 50 logs</h1>
+        <table data-role="table" class="two-side-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Time</th>
+                    <th>Code</th>
+                    <th>Machine Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="eventlog-table"></tbody>
+        </table>
+
+        <div id="error-msg" class="not-displayed"></div>
+    </div>
+
+    <footer data-role="footer" data-position="fixed">
+        <h4>Kentico</h4>
+    </footer>
 </div>

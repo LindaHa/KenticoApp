@@ -1,5 +1,7 @@
 ﻿"use strict";
 
+var system_api_domain = "http://localhost:8080";
+
 document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
 function onDeviceReady() {
@@ -14,9 +16,10 @@ function onDeviceReady() {
         $.get("systemPages.html", function (data) {
             $("body").append(data);
 
-            $('#restartServerYes-btn').on('click', function () {
-                restartServerApiCall();
-            });
+            $('#restartServerYes-btn').on('click', restartServerApiCall);
+            $('.showEventlog-btn').on('click', showEventlogApiCall);
+            $('#clearCacheYes-btn').on('click', clearCacheApiCall);
+
         });
         $.get("usrsPages.html", function (data) {
             $("body").append(data);
@@ -27,6 +30,8 @@ function onDeviceReady() {
         
         //instantiate all global popups from index.html
         $('#error-popup').enhanceWithin().popup();
+        $('#text-popup').enhanceWithin().popup();
+        $('#logout-popup').enhanceWithin().popup();
     });
 };
 
