@@ -19,10 +19,14 @@ function onDeviceReady() {
             $('#restartServerYes-btn').on('click', restartServerApiCall);
             $('.showEventlog-btn').on('click', showEventlogApiCall);
             $('#clearCacheYes-btn').on('click', clearCacheApiCall);
+            $('#cleanUnusedMmryYes-btn').on('click', cleanUnusedMmryApiCall);
 
         });
         $.get("usrsPages.html", function (data) {
             $("body").append(data);
+
+            $('#usrs-btn').on('click', getAllUsersApiCall);
+
         });
         $.get("authorizationPages.html", function (data) {
             $("body").append(data);

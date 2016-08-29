@@ -28,7 +28,7 @@
 				<tr>
 					<td class="td-first">Antonio Moreno Taqueria</td>
 					<td class="td-second">
-						<a href="#editUser-page" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a><br>
+						<a href="#editUser-page" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a>
 					</td>
 				</tr>
 			</tbody>
@@ -61,7 +61,7 @@
 			</ul>
 		</div>
 		<div class="push-down">
-			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
+			<div data-role="controlgroup" data-type="horizontal" class="pull-right">
 				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
 				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 			</div>
@@ -81,9 +81,9 @@
 					<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
 					<label for="usrnameEdit">Username:</label>
 					<input id="usrnameEdit-input" name="usrname" placeholder="Username" required"/>
-					<div data-role="collapsible">
+					<div data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 						<h1>Roles:</h1>
-						<table data-role="table" class="two-side-table">
+						<table id="users-table" data-role="table" class="two-side-table">
 							<thead>
 								<tr>
 									<th></th>
@@ -94,20 +94,23 @@
 								<tr>
 									<td class="td-first">Customer</td>
 									<td class="td-second">
-										<a href="#removeRole-popup" data-rel="popup" id="deletRole-btn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline pull-right ui-mini">-</a><br>
-										<div data-role="popup" id="removeRole-popup">
-											<h2>Are you sure you want to remove this role?</h2>
-											<a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
-											<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
-										</div>
-									</td>
+                                         <a href="#" data-rel="popup" id="removeRole-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>                                        
+                                    </td>    
 								</tr>
 							</tbody>
 						</table>
+                        <a href="#" data-rel="popup" id="addRole-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add role</a><br>
+
 					</div>
 				</div>
 			</form>			
 		</div>
+
+        <div data-role="popup" id="removeRole-popup">
+            <h2>Are you sure you want to remove this role?</h2>
+            <a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
+            <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
+        </div>
 
 		<div id="error-msg" class="not-displayed">
 		</div>
