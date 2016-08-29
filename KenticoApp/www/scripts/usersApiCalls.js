@@ -8,8 +8,8 @@ function getAllUsersApiCall() {
         success: function onResponse(response) {
             var $tablebody = $('#users-table');
             $tablebody.empty();
-            for (var i = 0; i < response.length; i++){
-                var r = response[i];
+            for (var i = 0; i < response.usersList.length; i++){
+                var r = response.usersList[i];
                 $tablebody.append(
                     '<tr>' +
 					    '<td class="td-first">' + r.UserID + '  ' + r.Surname + ' ' + r.FirstName + '</td>' +
