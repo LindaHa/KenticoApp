@@ -8,8 +8,8 @@
 			</ul>
 		</div>
 		<div class="push-down">
-			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
-				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+			<div data-role="controlgroup" data-type="horizontal" class="pull-right">
+				<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>				
+			<tbody id="users-table">				
 				<tr>
 					<td class="td-first">Antonio Moreno Taqueria</td>
 					<td class="td-second">
@@ -62,7 +62,7 @@
 		</div>
 		<div class="push-down">
 			<div data-role="controlgroup" data-type="horizontal" class="pull-right">
-				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 			</div>
 		</div>
@@ -73,14 +73,12 @@
 		<div>
 			<form class="push-down">
 				<div class="ui-field-contain">
-					<label for="NameEdit">First Name:</label>
-					<input id="NameEdit-input" name="firstName" placeholder="name" required />
-					<label for="SurnameEdit">Surname:</label>
-					<input id="SurnameEdit-input" name="Surname" placeholder="surname" required />
-					<label for="passwrdEdit">Password:</label>
-					<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
-					<label for="usrnameEdit">Username:</label>
-					<input id="usrnameEdit-input" name="usrname" placeholder="Username" required"/>
+                    <input type="hidden" id="userIdEdit-input" />
+                    <input type="hidden" id="usernameEdit-input"/>
+					<label for="nameEdit-input">First Name:</label>
+					<input id="nameEdit-input" name="firstName" placeholder="Name" required />
+					<label for="surnameEdit">Surname:</label>
+					<input id="surnameEdit-input" name="surname" placeholder="Surname" required />	
 					<div data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 						<h1>Roles:</h1>
 						<table id="users-table" data-role="table" class="two-side-table">
@@ -90,7 +88,7 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="userRoles-table">
 								<tr>
 									<td class="td-first">Customer</td>
 									<td class="td-second">
@@ -173,8 +171,8 @@
 	<div data-role="header" class="header">
 		<h1 id="app-title">Administration App</h1>
 		<div class="push-down">
-			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
-				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+			<div data-role="controlgroup" data-type="horizontal" class="pull-right">
+				<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 			</div>
 		</div>

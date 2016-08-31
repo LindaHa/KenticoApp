@@ -66,8 +66,8 @@
 				</ul>
 			</div>
 			<div class="push-down">
-				<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
-					<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<div data-role="controlgroup" data-type="horizontal" class="pull-right">
+					<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 					<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 				</div>
 			</div>
@@ -121,6 +121,11 @@
     <div data-role="popup" id="logout-popup" class="my-custom-popup">
         <h2>Are you sure you want to log out?</h2>
         <a href="#welcome-page" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
+    </div>
+    <div data-role="popup" id="removeRole-popup" class="my-custom-popup">
+        <h2>Are you sure you want to remove this role?</h2>
+        <a id="removeRoleYes-btn" href="#" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
         <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
     </div>
 

@@ -13,6 +13,7 @@ function onDeviceReady() {
         
     //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
     $(document).ready(function () {
+        //$('.user-profile-btn').text('click');
         $.get("systemPages.html", function (data) {
             $("body").append(data);
 
@@ -36,6 +37,7 @@ function onDeviceReady() {
         $('#error-popup').enhanceWithin().popup();
         $('#text-popup').enhanceWithin().popup();
         $('#logout-popup').enhanceWithin().popup();
+        $('#removeRole-popup').enhanceWithin().popup();
     });
 };
 
