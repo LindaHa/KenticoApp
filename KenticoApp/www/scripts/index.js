@@ -1,6 +1,7 @@
 ﻿"use strict";
 
 var system_api_domain = "http://localhost:8080";
+var kentico_site_name = "CorporateSite";
 
 document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
@@ -13,9 +14,9 @@ function onDeviceReady() {
         
     //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
     $(document).ready(function () {
-        //$('.user-profile-btn').text('click');
         $.get("systemPages.html", function (data) {
             $("body").append(data);
+            //$("#system-page").on("pageshow", General information);
 
             $('#restartServerYes-btn').on('click', restartServerApiCall);
             $('.showEventlog-btn').on('click', showEventlogApiCall);
@@ -26,7 +27,7 @@ function onDeviceReady() {
         $.get("usrsPages.html", function (data) {
             $("body").append(data);
 
-            $('#usrs-btn').on('click', getAllUsersApiCall);
+            $("#users-page").on("pageshow", getAllUsersApiCall);
 
         });
         $.get("authorizationPages.html", function (data) {

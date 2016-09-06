@@ -1,9 +1,9 @@
-﻿var system_api_url = system_api_domain + "/kenticoapi/users/";
+﻿var user_api_url = system_api_domain + "/kenticoapi/users/";
 
 function getAllUsersApiCall() {
     showCustomLoadingMessage();
     $.ajax({
-        url: system_api_url,
+        url: user_api_url,
         type: 'GET',
         success: function onResponse(response) {
             var $tablebody = $('#users-table');
@@ -56,15 +56,17 @@ function getAllUsersApiCall() {
     });
 }
 
-function removeUsersFromRolesApiCall(usernames, roleNames) {
+function removeUsersFromRolesApiCall(usernames, roleNames, siteName) {
+    if (typeof (siteName) === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
-        url: system_api_url + "remove-users-from-roles",
+        url: user_api_url + "remove-users-from-roles",
         type: 'POST',
         dataType: "json",
         data: {
             usernames: usernames,
-            roleNames: roleNames
+            roleNames: roleNames,
+            siteName: siteName
         },
         success: function (response) {
             $('#userRoles-table .role-name').each(function () {
@@ -78,6 +80,31 @@ function removeUsersFromRolesApiCall(usernames, roleNames) {
         },
         complete: function () {
             $('#removeRole-popup').popup('close');
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
+
+function showRolesApiCall() {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: system_api_url + "show-roles",
+        type: 'GET',
+        success: function (response) {
+            for (var i = 0; i < response.roleList.length; i++) {
+                var r = response.roleList[i];
+                (function (row, index) {
+                    $('#eventDescription' + index + '-a').on('click', function () {
+                        showTextPopup(row.EventDescription);
+                    });
+                })(r, i)
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
             hideCustomLoadingMessage();
         }
     });
