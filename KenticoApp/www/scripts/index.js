@@ -25,7 +25,7 @@ function onDeviceReady() {
 
         });
         $.get("usrsPages.html", function (data) {
-            $("body").append(data);
+            $("body").append(data);             
 
             $("#users-page").on("pageshow", getAllUsersApiCall);
 

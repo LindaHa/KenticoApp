@@ -78,8 +78,12 @@
 					<label for="nameEdit-input">First Name:</label>
 					<input id="nameEdit-input" name="firstName" placeholder="Name" required />
 					<label for="surnameEdit">Surname:</label>
-					<input id="surnameEdit-input" name="surname" placeholder="Surname" required />	
-					<div data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+					<input id="surnameEdit-input" name="surname" placeholder="Surname" required />	                    
+                    <div class="ui-mini ui-corner-all ui-shadow ui-btn-inline above-full-width">
+                        <button id="saveEditUser-btn" class="pull-left ui-btn ui-icon-check ui-btn-icon-left " style="font-weight:bold">Save Changes</button>
+                        <a href="#" id="cancelEditUser-btn" class="pull-right ui-icon-delete ui-btn-icon-left ui-btn" style="font-weight:bold">Cancel</a>
+                    </div>                  
+					<div class="wrapper" data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 						<h1>Roles:</h1>
 						<table id="users-table" data-role="table" class="two-side-table">
 							<thead>
@@ -92,16 +96,32 @@
 								<tr>
 									<td class="td-first">Customer</td>
 									<td class="td-second">
-                                         <a href="#" data-rel="popup" id="removeRole-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>                                        
+                                         <a href="#" data-rel="popup" id="removeRole-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a>                                       
                                     </td>    
 								</tr>
 							</tbody>
 						</table>
-                        <a href="#" data-rel="popup" id="addRole-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add role</a><br>
-
+                        <a href="#allRolesCheckbox-popup" data-rel="popup" id="addRole-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add role</a>
 					</div>
 				</div>
-			</form>			
+			</form>		
+            <div data-role="popup" id="allRolesCheckbox-popup">
+                <form method="post" action="demoform.asp">
+                    <fieldset data-role="controlgroup">
+                        <legend>Roles:</legend>
+                        <span id="allRolesCheckbox-form">
+                            <label for="red">Red</label>
+                            <input type="checkbox" name="favcolor" id="red" value="red">
+                            <label for="green">Green</label>
+                            <input type="checkbox" name="favcolor" id="green" value="green">
+                            <label for="blue">Blue</label>
+                            <input type="checkbox" name="favcolor" id="blue" value="blue">
+                        </span>
+                        <button id="addSelectedRoles-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add selected roles</button>
+                        
+                    </fieldset>
+                </form>
+            </div>	
 		</div>
 
         <div data-role="popup" id="removeRole-popup">

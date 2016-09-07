@@ -42,6 +42,17 @@ function getAllUsersApiCall() {
                                 });                                
                             })(j);
                         }
+
+                        $('#addRole-btn').off().on('click', function(){
+                            showRolesApiCall();
+                        });
+                        $('#addSelectedRoles-btn').off().on('click', function () {
+                            var selected = [];
+                            $('#allRolesCheckbox-form input:checked').each(function () {
+                                selected.push($(this).val());
+                            });
+                        });
+
                     });
                 })(r, i)
 
@@ -85,20 +96,50 @@ function removeUsersFromRolesApiCall(usernames, roleNames, siteName) {
     });
 }
 
+function AddUsersToRolesApiCall(usernames, roleNames, siteName) {
+    if (typeof (siteName) === "undefined") siteName = kentico_site_name;
+    showCustomLoadingMessage();
+    $.ajax({
+        url: user_api_url + "remove-users-from-roles",
+        type: 'POST',
+        dataType: "json",
+        data: {
+            usernames: usernames,
+            roleNames: roleNames,
+            siteName: siteName
+        },
+        success: function (response) {
+            $('#userRoles-table .role-name').each(function () {
+                if ($.inArray($(this).html(), roleNames) != -1) {
+                    $(this).parent().parent().remove();
+                }
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR, textStatus, errorThrown);
+        },
+        complete: function () {
+            $('#removeRole-popup').popup('close');
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
 
 function showRolesApiCall() {
     showCustomLoadingMessage();
     $.ajax({
-        url: system_api_url + "show-roles",
+        url: user_api_url + "show-roles",
         type: 'GET',
         success: function (response) {
+            var formbody = $('#allRolesCheckbox-form');
+            formbody.empty();
             for (var i = 0; i < response.roleList.length; i++) {
                 var r = response.roleList[i];
-                (function (row, index) {
-                    $('#eventDescription' + index + '-a').on('click', function () {
-                        showTextPopup(row.EventDescription);
-                    });
-                })(r, i)
+                formbody.append(
+                   '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
+                   '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
+                );
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
