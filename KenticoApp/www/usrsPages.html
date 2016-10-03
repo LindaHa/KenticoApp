@@ -24,14 +24,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody id="users-table">				
-				<tr>
-					<td class="td-first">Antonio Moreno Taqueria</td>
-					<td class="td-second">
-						<a href="#editUser-page" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a>
-					</td>
-				</tr>
-			</tbody>
+			<tbody id="users-table"></tbody>
 		</table>		
 
 		<div id="error-msg" class="not-displayed">
@@ -79,9 +72,9 @@
 					<input id="nameEdit-input" name="firstName" placeholder="Name" required />
 					<label for="surnameEdit">Surname:</label>
 					<input id="surnameEdit-input" name="surname" placeholder="Surname" required />	                    
-                    <div class="ui-mini ui-corner-all ui-shadow ui-btn-inline above-full-width">
-                        <button id="saveEditUser-btn" class="pull-left ui-btn ui-icon-check ui-btn-icon-left " style="font-weight:bold">Save Changes</button>
-                        <a href="#" id="cancelEditUser-btn" class="pull-right ui-icon-delete ui-btn-icon-left ui-btn" style="font-weight:bold">Cancel</a>
+                    <div class="ui-mini ui-btn-inline above-full-width">
+                        <button id="saveEditUser-btn" class="ui-corner-all ui-shadow ui-btn-inline pull-left ui-btn ui-icon-check ui-btn-icon-left " style="font-weight:bold">Save Changes</button>
+                        <a href="#" id="cancelEditUser-btn" class="ui-corner-all ui-shadow ui-btn-inline pull-right ui-icon-delete ui-btn-icon-left ui-btn" style="font-weight:bold">Cancel</a>
                     </div>                  
 					<div class="wrapper" data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 						<h1>Roles:</h1>
@@ -105,22 +98,19 @@
 					</div>
 				</div>
 			</form>		
-            <div data-role="popup" id="allRolesCheckbox-popup">
-                <form method="post" action="demoform.asp">
-                    <fieldset data-role="controlgroup">
-                        <legend>Roles:</legend>
-                        <span id="allRolesCheckbox-form">
-                            <label for="red">Red</label>
-                            <input type="checkbox" name="favcolor" id="red" value="red">
-                            <label for="green">Green</label>
-                            <input type="checkbox" name="favcolor" id="green" value="green">
-                            <label for="blue">Blue</label>
-                            <input type="checkbox" name="favcolor" id="blue" value="blue">
-                        </span>
-                        <button id="addSelectedRoles-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add selected roles</button>
-                        
-                    </fieldset>
-                </form>
+            <div data-role="popup" id="allRolesCheckbox-popup" class="scrollable-popup">
+                <fieldset data-role="controlgroup">
+                    <legend>Roles:</legend>
+                    <span id="allRolesCheckbox-form">
+                        <label for="red">Red</label>
+                        <input type="checkbox" name="favcolor" id="red" value="red">
+                        <label for="green">Green</label>
+                        <input type="checkbox" name="favcolor" id="green" value="green">
+                        <label for="blue">Blue</label>
+                        <input type="checkbox" name="favcolor" id="blue" value="blue">
+                    </span>
+                    <button id="addSelectedRoles-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add selected roles</button>
+                </fieldset>
             </div>	
 		</div>
 
@@ -133,14 +123,7 @@
 		<div id="error-msg" class="not-displayed">
 		</div>
 	</div>
-
 	<footer data-role="footer" data-position="fixed">
-		<div class="wrapper">
-			<div class="above-full-width">
-				<button id="saveEditUser-btn" class="ui-btn ui-icon-check ui-btn-icon-left ui-corner-all ui-shadow" style="font-weight:bold">Save Changes</button>
-				<a href="#" id="cancelEditUser-btn" class="pull-right ui-icon-delete ui-btn-icon-left ui-btn ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Cancel</a>
-			</div>
-		</div>
 		<h4>Kentico</h4>
 	</footer>
 </div>

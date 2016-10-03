@@ -24,32 +24,40 @@ function getAllUsersApiCall() {
                         $('#nameEdit-input').val(row.FirstName);
                         $('#surnameEdit-input').val(row.Surname);
 
-                        var $tablebody2 = $('#userRoles-table');
-                        $tablebody2.empty();
-                        for (var j = 0; j < row.Roles.length; j++) {
-                            $tablebody2.append(
-                                '<tr>' +
-                                    '<td class="td-first"><span class="role-name">' + row.Roles[j] + '</span></td>' +
-                                    '<td class="td-second">' +
-                                         '<a href="#removeRole-popup" data-rel="popup" id="removeRole' + j + '-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>' +
-                                    '</td>' +  
-                                '</tr>');
-                            (function (index2) {
-                                $('#removeRole' + index2 + '-btn').on('click', function () {
-                                    $('#removeRoleYes-btn').off().on('click', function () {
-                                        removeUsersFromRolesApiCall([row.Username], [row.Roles[index2]]);
-                                    });
-                                });                                
-                            })(j);
-                        }
+                        var tablebody2 = $('#userRoles-table');
+                        createUserRolesTable(row.Username, row.Roles, tablebody2);
 
                         $('#addRole-btn').off().on('click', function(){
-                            showRolesApiCall();
+                            getRolesApiCall(function(response) {
+                                var formbody = $('#allRolesCheckbox-form');
+                                formbody.empty();
+                                for (var i = 0; i < response.roleList.length; i++) {
+                                    var r = response.roleList[i];
+                                    formbody.append(
+                                       '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
+                                       '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
+                                    );
+                                }
+                            });
                         });
                         $('#addSelectedRoles-btn').off().on('click', function () {
                             var selected = [];
                             $('#allRolesCheckbox-form input:checked').each(function () {
                                 selected.push($(this).val());
+                            });
+                            AddUsersToRolesApiCall([row.Username], selected, kentico_site_name, function () {
+                                getRolesApiCall(function (response) {
+                                    var allRoles = response.roleList;
+                                    for (l = 0; l < selected.length; l++) {
+                                        for (var k = 0; k < allRoles.length; k++) {
+                                            if (allRoles[k].RoleId == selected[l]) {
+                                                row.Roles.push(allRoles[k].RoleName);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    createUserRolesTable(row.Username, row.Roles, tablebody2);
+                                });
                             });
                         });
 
@@ -67,7 +75,7 @@ function getAllUsersApiCall() {
     });
 }
 
-function removeUsersFromRolesApiCall(usernames, roleNames, siteName) {
+function removeUsersFromRolesApiCall(usernames, roleNames, siteName, success_callback) {
     if (typeof (siteName) === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
@@ -80,11 +88,7 @@ function removeUsersFromRolesApiCall(usernames, roleNames, siteName) {
             siteName: siteName
         },
         success: function (response) {
-            $('#userRoles-table .role-name').each(function () {
-                if ($.inArray($(this).html(), roleNames) != -1) {
-                    $(this).parent().parent().remove();     
-                }
-            });
+            if (success_callback) success_callback(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR, textStatus, errorThrown);
@@ -96,51 +100,38 @@ function removeUsersFromRolesApiCall(usernames, roleNames, siteName) {
     });
 }
 
-function AddUsersToRolesApiCall(usernames, roleNames, siteName) {
+function AddUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) {
     if (typeof (siteName) === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
-        url: user_api_url + "remove-users-from-roles",
+        url: user_api_url + "add-users-to-roles",
         type: 'POST',
         dataType: "json",
         data: {
             usernames: usernames,
-            roleNames: roleNames,
+            roleIds: roleIds,
             siteName: siteName
         },
         success: function (response) {
-            $('#userRoles-table .role-name').each(function () {
-                if ($.inArray($(this).html(), roleNames) != -1) {
-                    $(this).parent().parent().remove();
-                }
-            });
+            if (success_callback) success_callback(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR, textStatus, errorThrown);
         },
         complete: function () {
-            $('#removeRole-popup').popup('close');
+            $('#allRolesCheckbox-popup').popup('close');
             hideCustomLoadingMessage();
         }
     });
 }
 
-
-function showRolesApiCall() {
+function getRolesApiCall(success_callback) {
     showCustomLoadingMessage();
     $.ajax({
         url: user_api_url + "show-roles",
         type: 'GET',
-        success: function (response) {
-            var formbody = $('#allRolesCheckbox-form');
-            formbody.empty();
-            for (var i = 0; i < response.roleList.length; i++) {
-                var r = response.roleList[i];
-                formbody.append(
-                   '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
-                   '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
-                );
-            }
+        success: function (data) {
+            if(success_callback) success_callback(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR);
@@ -150,3 +141,28 @@ function showRolesApiCall() {
         }
     });
 }
+
+function createUserRolesTable(username, roles, tableBody) {
+     tableBody.empty();
+     for (var j = 0; j < roles.length; j++) {
+        tableBody.append(
+            '<tr>' +
+                '<td class="td-first"><span class="role-name">' + roles[j] + '</span></td>' +
+                '<td class="td-second">' +
+                     '<a href="#removeRole-popup" data-rel="popup" id="removeRole' + j +
+                     '-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>' +
+                '</td>' +  
+            '</tr>');
+        (function (index2) {
+            $('#removeRole' + index2 + '-btn').on('click', function () {
+                $('#removeRoleYes-btn').off().on('click', function () {
+                    removeUsersFromRolesApiCall([username], [roles[index2]], kentico_site_name, function (response) {
+                        roles.splice(index2, 1);
+                        createUserRolesTable(username, roles, tableBody);
+                    });
+                });
+            });                                
+        })(j);
+    }
+}
+   
