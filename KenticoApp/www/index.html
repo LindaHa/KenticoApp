@@ -66,8 +66,8 @@
 				</ul>
 			</div>
 			<div class="push-down">
-				<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
-					<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+				<div data-role="controlgroup" data-type="horizontal" class="pull-right">
+					<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 					<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 				</div>
 			</div>
@@ -79,7 +79,7 @@
 					<a href="#system-page" id="system-btn" class="ui-btn ui-shadow ui-corner-all">System</a>
 					<a href="#systemInfo-popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">System</a>
 					<div data-role="popup" id="systemInfo-popup">
-						<p>To view general system information, the event log, to restart the system, clear unused memory and cache memory.</p>
+						<p>To view general system information, the event log, to restart the system, clean unused memory and cache memory.</p>
 					</div>
 				</div>
 
@@ -114,13 +114,18 @@
         <h2 id="errorPopup-text">Text</h2>
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-inline">Ok</a>
     </div>
-    <div data-role="popup" id="text-popup" class="my-custom-popup">
+    <div data-role="popup" id="text-popup" class="my-custom-popup scrollable-popup">
         <p id="textPopup-text">Text</p>
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-inline">Ok</a>
     </div>
     <div data-role="popup" id="logout-popup" class="my-custom-popup">
         <h2>Are you sure you want to log out?</h2>
         <a href="#welcome-page" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
+    </div>
+    <div data-role="popup" id="removeRole-popup" class="my-custom-popup">
+        <h2>Are you sure you want to remove this role?</h2>
+        <a id="removeRoleYes-btn" href="#" class="ui-btn ui-btn-icon-left ui-icon-check ui-btn-inline">Yes</a>
         <a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline pull-right">No</a>
     </div>
 
@@ -131,5 +136,6 @@
 	<script type="text/javascript" src="scripts/index.js"></script>
     <script type="text/javascript" src="scripts/helpers.js"></script>
     <script type="text/javascript" src="scripts/systemApiCalls.js"></script>
+    <script type="text/javascript" src="scripts/usersApiCalls.js"></script>
 </body>
 </html>

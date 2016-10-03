@@ -26,8 +26,7 @@ function showEventlogApiCall() {
         success: function (response) {
             var $tablebody = $('#eventlog-table');
             $tablebody.empty();
-            for (var i = 0; i < response.eventList.length; i++)
-            {
+            for (var i = 0; i < response.eventList.length; i++){
                 var r = response.eventList[i];
                 $tablebody.append(
                     '<tr>' +
@@ -69,6 +68,24 @@ function clearCacheApiCall() {
         },
         complete: function () {
             $('#clearCache-popup').popup('close');
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
+function cleanUnusedMmryApiCall() {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: system_api_url + "clean-unused-memory",
+        type: 'POST',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            $('#cleanMemory-popup').popup('close');
             hideCustomLoadingMessage();
         }
     });

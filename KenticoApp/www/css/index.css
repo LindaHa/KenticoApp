@@ -113,7 +113,7 @@ h1 {
 }
 
 .above-full-width { 
-	position:absolute;
+	/*position:absolute;*/
 	bottom: 0;
 	padding-left:0;
 	padding-right:0;
@@ -199,4 +199,10 @@ tr:nth-child(even) {
 }
 .my-custom-popup .ui-btn{
     border-radius:5px;
+}
+
+.scrollable-popup {
+    overflow-y: scroll; 
+    max-width: 300px; 
+    max-height: 400px;   
 }

@@ -8,8 +8,8 @@
 			</ul>
 		</div>
 		<div class="push-down">
-			<div data-role="controlgroup" data-type="horizontal" class=" pull-right">
-				<a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+			<div data-role="controlgroup" data-type="horizontal" class="pull-right">
+				<a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
 				<a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
 			</div>
 		</div>
@@ -23,14 +23,14 @@
 			</div>
 			<div class="ui-block-b pull-right">
 				<a href="#clearCache-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Cache</a><br>
-				<a href="#clearMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Unused Memory</a><br>
+				<a href="#cleanMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clean Unused Memory</a><br>
 				<a href="#systemEventlog-page" class="showEventlog-btn ui-btn ui-corner-all ui-shadow">Eventlog</a><br>
 				<a href="#restartServer-popup" data-rel="popup" class="restartServer-btn ui-btn ui-corner-all ui-shadow">Restart Server</a><br>
 			</div>
 		</div>
 
 		<div id="system-small">
-			<div data-role="collapsible" class="push-down">
+			<div data-role="collapsible" class="push-down"  data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 				<h1>General information</h1>
 				<p>information</p>
 			</div>
@@ -42,10 +42,10 @@
 					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
 				</div>
 
-				<a href="#clearMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Unused Memory</a><br>
-				<div data-role="popup" id="clearMemory-popup">
-					<h2>Are you sure you want to clear unused memory?</h2>
-					<a href="#" class="ui-btn ui-btn-icon-left ui-icon-check ui-corner-all ui-btn-inline">Yes</a>					
+				<a href="#cleanMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clean Unused Memory</a><br>
+				<div data-role="popup" id="cleanMemory-popup">
+					<h2>Are you sure you want to clean unused memory?</h2>
+					<a href="#" id="cleanUnusedMmryYes-btn" class="ui-btn ui-btn-icon-left ui-icon-check ui-corner-all ui-btn-inline">Yes</a>					
 					<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline ui-corner-all pull-right">No</a>
 				</div>
 
@@ -83,7 +83,7 @@
         </div>
         <div class="push-down">
             <div data-role="controlgroup" data-type="horizontal" class="pull-right">
-                <a href="#userView-page" class="ui-btn ui-icon-user ui-btn-icon-left">User</a>
+                <a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
                 <a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
             </div>
         </div>

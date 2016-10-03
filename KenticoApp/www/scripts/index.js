@@ -1,6 +1,7 @@
 ﻿"use strict";
 
 var system_api_domain = "http://localhost:8080";
+var kentico_site_name = "CorporateSite";
 
 document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
@@ -15,14 +16,19 @@ function onDeviceReady() {
     $(document).ready(function () {
         $.get("systemPages.html", function (data) {
             $("body").append(data);
+            //$("#system-page").on("pageshow", General information);
 
             $('#restartServerYes-btn').on('click', restartServerApiCall);
             $('.showEventlog-btn').on('click', showEventlogApiCall);
             $('#clearCacheYes-btn').on('click', clearCacheApiCall);
+            $('#cleanUnusedMmryYes-btn').on('click', cleanUnusedMmryApiCall);
 
         });
         $.get("usrsPages.html", function (data) {
-            $("body").append(data);
+            $("body").append(data);             
+
+            $("#users-page").on("pageshow", getAllUsersApiCall);
+
         });
         $.get("authorizationPages.html", function (data) {
             $("body").append(data);
@@ -32,6 +38,7 @@ function onDeviceReady() {
         $('#error-popup').enhanceWithin().popup();
         $('#text-popup').enhanceWithin().popup();
         $('#logout-popup').enhanceWithin().popup();
+        $('#removeRole-popup').enhanceWithin().popup();
     });
 };
 
