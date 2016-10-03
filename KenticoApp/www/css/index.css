@@ -118,7 +118,7 @@ h1 {
 	padding-left:0;
 	padding-right:0;
 	left:0;
-	width:90%;
+	width:100%;
 	margin-left:5%;
 }
 .wrapper {
@@ -206,3 +206,8 @@ tr:nth-child(even) {
     max-width: 300px; 
     max-height: 400px;   
 }
+
+#allRolesCheckbox-popup{
+    align-self: center;
+}
+
