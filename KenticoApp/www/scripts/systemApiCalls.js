@@ -1,4 +1,6 @@
-﻿var system_api_url = system_api_domain + "/kenticoapi/system/";
+﻿"use strict";
+
+var system_api_url = system_api_domain + "/kenticoapi/system/";
 
 function restartServerApiCall() {
     showCustomLoadingMessage();

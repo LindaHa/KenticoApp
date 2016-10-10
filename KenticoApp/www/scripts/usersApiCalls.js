@@ -1,4 +1,6 @@
-﻿var user_api_url = system_api_domain + "/kenticoapi/users/";
+﻿"use strict";
+
+var user_api_url = system_api_domain + "/kenticoapi/users/";
 
 function getAllUsersApiCall() {
     showCustomLoadingMessage();
@@ -128,7 +130,7 @@ function AddUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) 
 function getRolesApiCall(success_callback) {
     showCustomLoadingMessage();
     $.ajax({
-        url: user_api_url + "show-roles",
+        url: user_api_url + "get-roles",
         type: 'GET',
         success: function (data) {
             if(success_callback) success_callback(data);

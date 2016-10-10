@@ -1,62 +1,67 @@
-﻿var authorization_api_url = system_api_domain + "/kenticoapi/authorization/";
+﻿"use strict";
 
-function showRolesApiCall() {
+var authorization_api_url = system_api_domain + "/kenticoapi/authorization/";
+
+function showAllRolesApiCall() {
     showCustomLoadingMessage();
     $.ajax({
-        url: "/kenticoapi/users/all-roles",
+        url: user_api_url + "/get-roles",
         type: 'GET',
-        success: function (response) {
-            var tablebody = $('#showAllRoles-table');
-            tablebody.empty();
+        success: function onResponse(response) {
+            var $tablebody = $('#showAllRoles-table');
+            $tablebody.empty();
             for (var i = 0; i < response.roleList.length; i++) {
-                var r = response.roleList[i];
-                tablebody.append(
+                var row = response.roleList[i];
+                $tablebody.append(
                     '<tr>' +
-					    '<td class="td-first">' + r.RoleName  + '</td>' +
-                        '<td class="td-second">' +
-						'<a id="viewRole' + i + '-btn" href="#viewRole-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-eye ui-btn-icon-left pull-right ui-mini">View</a><br>' +
-                        '</td>'+
+                        '<td>' + row.RoleName +'</td>' +
                         '<td class="td-second.special">' +
-						'<a id="deleteRole' + i + '-btn" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext pull-right ui-mini">Delete Role</a><br>' +
+						    '<a id="viewRole' + i + '-btn" href="#viewRole-page" class="viewRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-eye ui-shadow ui-btn-inline pull-right ui-mini"></a><br>' +
+                        '</td>' +
+                        '<td class="td-third">' +
+						    '<a id="deleteRole' + i + '-btn" href="#viewRole-page" class="deleteRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow ui-btn-inline pull-right ui-mini ui-btn-icon-notext"></a><br>' +
                         '</td>'+
-                    '</tr>');
-                (function (row, index) {
-                    $('#viewRole' + index + '-btn').on('click', function () {
-                        document.getElementById(permissionName-h2).innerHTML = row.RoleName;
-                        var $tablebody2 = $('#permissionsOfRole-table');
-                        $tablebody2.empty();
-                        for (var j = 0; j < row.Permissions.length; j++) {
-                            $tablebody2.append(
-                                '<tr>' +
-                                    '<td class="td-first"><span class="permission-name">' + row.permissionName[j] + '</span></td>' +
-                                    '<td class="td-second">' +
-                                         '<a href="#removeRole-popup" data-rel="popup" id="removeRole' + j + '-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>' +
-                                    '</td>' +  
-                                '</tr>');
-                            (function (index2) {
-                                $('#removeRole' + index2 + '-btn').on('click', function () {
-                                    $('#removeRoleYes-btn').off().on('click', function () {
-                                        removeUsersFromRolesApiCall([row.Username], [row.Roles[index2]]);
-                                    });
-                                });                                
-                            })(j);
-                        }
-
-                        $('#addRole-btn').off().on('click', function(){
-                            showRolesApiCall();
-                        });
-                        $('#addSelectedRoles-btn').off().on('click', function () {
-                            var selected = [];
-                            $('#allRolesCheckbox-form input:checked').each(function () {
-                                selected.push($(this).val());
-                            });
-                        });
-
-                    });
-                })(r, i)
-
+                    '</tr>'
                 );
+                (function (row2, index) {
+                    $('#viewRole' + index + '-btn').on('click', function () {
+                        var tablebody2 = $('#permissionsOfRole-table');
+                        createRolePermissionsTable(row2, tablebody2, "roleName-h1");
+                    });
+                })(row, i)
             }
+            //$('#addRole-btn').off().on('click', function () {
+            //    getRolesApiCall(function (response) {
+            //        var formbody = $('#allRolesCheckbox-form');
+            //        formbody.empty();
+            //        for (var i = 0; i < response.roleList.length; i++) {
+            //            var r = response.roleList[i];
+            //            formbody.append(
+            //               '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
+            //               '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
+            //            );
+            //        }
+            //    });
+            //});
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR, textStatus, errorThrown);
+        },
+        complete: function () {
+            $('#removeRole-popup').popup('close');
+            hideCustomLoadingMessage();
+        }
+
+    });
+}
+
+function getRolePermissionsApiCall(roleId, success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: authorization_api_url + "get-permissions/" + roleId,
+        type: 'GET',
+        success: function (data) {
+            if (success_callback) success_callback(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR);
@@ -65,4 +70,36 @@ function showRolesApiCall() {
             hideCustomLoadingMessage();
         }
     });
+}
+
+function createRolePermissionsTable(role, tableBody, headerElement) {
+    tableBody.empty();
+    if (headerElement != null) {
+        $('#' + headerElement).html(role.RoleName);
+    }
+    getRolePermissionsApiCall(role.RoleId, function (result) {
+        var permissions = result.permissionList;
+        for (var i = 0; i < permissions.length; i++) {
+            tableBody.append(
+                '<tr>' +
+                    '<td class="td-first"><span class="permission-name">' + permissions[i].PermissionDisplayName +
+                    " - " + permissions[i].PermissionDescription +
+                    '</span></td>' +
+                    '<td class="td-second">' +
+                         '<a href="#removePermission-popup" data-rel="popup" id="removePermission' + i +
+                         '-btn" class="pull-right ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-mini"></a><br>' +
+                    '</td>' +
+                '</tr>');
+        }
+    });
+        //(function (index) {
+        //    $('#removePermission' + index + '-btn').on('click', function () {
+        //        $('#removePermissionYes-btn').off().on('click', function () {
+        //            removeUsersFromRolesApiCall([username], [roles[index]], kentico_site_name, function (response) {
+        //                roles.splice(index, 1);
+        //                createUserRolesTable(username, roles, tableBody);
+        //            });
+        //        });
+        //    });
+        //})(i);
 }

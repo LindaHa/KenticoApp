@@ -113,7 +113,7 @@ h1 {
 }
 
 .above-full-width { 
-	/*position:absolute;*/
+	position:absolute;
 	bottom: 0;
 	padding-left:0;
 	padding-right:0;
@@ -167,7 +167,6 @@ tr:nth-child(even) {
 
 .two-side-table .td-first{
 	width:70%;
-	white-space: nowrap;
 	overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -180,6 +179,10 @@ tr:nth-child(even) {
 
 .two-side-table .td-second.special{
 	width:20%;
+}
+
+.two-side-table .td-third{
+    width:20%;
 }
 
 #kentico_logo {
@@ -211,3 +214,11 @@ tr:nth-child(even) {
     align-self: center;
 }
 
+.full-width{
+    width:100%;
+}
+
+.no-side-padding{
+    padding-left: 0;
+    padding-right: 0;
+}

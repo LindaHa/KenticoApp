@@ -31,7 +31,8 @@ function onDeviceReady() {
 
         });
         $.get("authorizationPages.html", function (data) {
-            $("body").append(data);
+            $("body").append(data); 
+            $("#authorization-page").on("pageshow", showAllRolesApiCall);
         });
         
         //instantiate all global popups from index.html
