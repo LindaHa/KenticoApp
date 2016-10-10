@@ -26,6 +26,10 @@ Working functionality
   
 2. Users
   1. Displaying users and their roles
+  2. Adding and removing roles from users
+  
+2. Authorization
+  1. Displaying all roles and their permissions
   
 Future development
 =======================

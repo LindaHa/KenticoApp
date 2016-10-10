@@ -14,20 +14,18 @@ function getAllUsersApiCall() {
                 var r = response.usersList[i];
                 $tablebody.append(
                     '<tr>' +
-					    '<td class="td-first">' + r.UserId + ' : ' + r.Username + '</td>' +
+					    '<td class="td-first">' + r.UserId + ' : ' + r.Fullname + '</td>' +
                         '<td class="td-second">' +
 						'<a id="editUser' + i + '-btn" href="#editUser-page" class="editUser-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a><br>' +
                         '</td>'+
                     '</tr>');
                 (function (row, index) {
                     $('#editUser' + index + '-btn').on('click', function () {
-                        $('#userIdEdit-input').val(row.UserId);
-                        $('#usernameEdit-input').val(row.Username);
                         $('#nameEdit-input').val(row.FirstName);
                         $('#surnameEdit-input').val(row.Surname);
 
                         var tablebody2 = $('#userRoles-table');
-                        createUserRolesTable(row.Username, row.Roles, tablebody2);
+                        createUserRolesTable(row.Fullname, row.Roles, tablebody2);
 
                         $('#addRole-btn').off().on('click', function(){
                             getRolesApiCall(function(response) {
@@ -36,7 +34,7 @@ function getAllUsersApiCall() {
                                 for (var i = 0; i < response.roleList.length; i++) {
                                     var r = response.roleList[i];
                                     formbody.append(
-                                       '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
+                                       '<label for="allRolesCheckbox' + i + '">' + r.RoleDisplayName + '</label>' +
                                        '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
                                     );
                                 }
@@ -53,7 +51,7 @@ function getAllUsersApiCall() {
                                     for (l = 0; l < selected.length; l++) {
                                         for (var k = 0; k < allRoles.length; k++) {
                                             if (allRoles[k].RoleId == selected[l]) {
-                                                row.Roles.push(allRoles[k].RoleName);
+                                                row.Roles.push(allRoles[k].RoleDisplayName);
                                                 break;
                                             }
                                         }
