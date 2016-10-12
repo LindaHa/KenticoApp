@@ -13,16 +13,25 @@ function showAllRolesApiCall() {
             for (var i = 0; i < response.roleList.length; i++) {
                 var row = response.roleList[i];
                 $tablebody.append(
-                    '<tr>' +
-                        '<td>' + row.RoleName +'</td>' +
+                    '<tr id="rowOfRoles' + i + '">' +
+                        '<td>' + row.RoleId + " : " + row.RoleDisplayName +'</td>' +
                         '<td class="td-second.special">' +
 						    '<a id="viewRole' + i + '-btn" href="#viewRole-page" class="viewRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-eye ui-shadow ui-btn-inline pull-right ui-mini"></a><br>' +
                         '</td>' +
                         '<td class="td-third">' +
-						    '<a id="deleteRole' + i + '-btn" href="#viewRole-page" class="deleteRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow ui-btn-inline pull-right ui-mini ui-btn-icon-notext"></a><br>' +
+						    '<a id="deleteRole' + i + '-btn" data-rel="popup" href="#deleteRole-popup" class="deleteRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow ui-btn-inline pull-right ui-mini ui-btn-icon-notext"></a><br>' +
                         '</td>'+
                     '</tr>'
                 );
+                (function (index2) {
+                    $('#deleteRole' + index2 + '-btn').on('click', function () {
+                        $('#deleteRoleYes-btn').off().on('click', function () {
+                            deleteRoleApiCall(response.roleList[index2].RoleId, function () {
+                                $('#rowOfRoles' + index2).remove();
+                            });
+                        });
+                    });
+                })(i);
                 (function (row2, index) {
                     $('#viewRole' + index + '-btn').on('click', function () {
                         var tablebody2 = $('#permissionsOfRole-table');
@@ -48,7 +57,7 @@ function showAllRolesApiCall() {
             showAjaxError(jqXHR, textStatus, errorThrown);
         },
         complete: function () {
-            $('#removeRole-popup').popup('close');
+            $('#deleteRole-popup').popup('close');
             hideCustomLoadingMessage();
         }
 
@@ -75,7 +84,7 @@ function getRolePermissionsApiCall(roleId, success_callback) {
 function createRolePermissionsTable(role, tableBody, headerElement) {
     tableBody.empty();
     if (headerElement != null) {
-        $('#' + headerElement).html(role.RoleName);
+        $('#' + headerElement).html(role.RoleDisplayName);
     }
     getRolePermissionsApiCall(role.RoleId, function (result) {
         var permissions = result.permissionList;
@@ -102,4 +111,22 @@ function createRolePermissionsTable(role, tableBody, headerElement) {
         //        });
         //    });
         //})(i);
+}
+
+function deleteRoleApiCall(roleId, success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: authorization_api_url + "delete-role/" + roleId,
+        type: 'POST',
+        success: function (response) {
+            if (success_callback) success_callback(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            $('#deleteRole-popup').popup('close');
+            hideCustomLoadingMessage();
+        }
+    });
 }

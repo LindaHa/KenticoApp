@@ -40,6 +40,7 @@ function onDeviceReady() {
         $('#text-popup').enhanceWithin().popup();
         $('#logout-popup').enhanceWithin().popup();
         $('#removeRole-popup').enhanceWithin().popup();
+        $('#deleteRole-popup').enhanceWithin().popup();
     });
 };
 

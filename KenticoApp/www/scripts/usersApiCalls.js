@@ -14,18 +14,20 @@ function getAllUsersApiCall() {
                 var r = response.usersList[i];
                 $tablebody.append(
                     '<tr>' +
-					    '<td class="td-first">' + r.UserId + ' : ' + r.Fullname + '</td>' +
+					    '<td class="td-first">' + r.UserId + ' : ' + r.Username + '</td>' +
                         '<td class="td-second">' +
 						'<a id="editUser' + i + '-btn" href="#editUser-page" class="editUser-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a><br>' +
                         '</td>'+
                     '</tr>');
                 (function (row, index) {
                     $('#editUser' + index + '-btn').on('click', function () {
+                        $('#userIdEdit-input').val(row.UserId);
+                        $('#usernameEdit-input').val(row.Username);
                         $('#nameEdit-input').val(row.FirstName);
                         $('#surnameEdit-input').val(row.Surname);
 
                         var tablebody2 = $('#userRoles-table');
-                        createUserRolesTable(row.Fullname, row.Roles, tablebody2);
+                        createUserRolesTable(row.Username, row.Roles, tablebody2);
 
                         $('#addRole-btn').off().on('click', function(){
                             getRolesApiCall(function(response) {
@@ -48,7 +50,7 @@ function getAllUsersApiCall() {
                             AddUsersToRolesApiCall([row.Username], selected, kentico_site_name, function () {
                                 getRolesApiCall(function (response) {
                                     var allRoles = response.roleList;
-                                    for (l = 0; l < selected.length; l++) {
+                                    for (var l = 0; l < selected.length; l++) {
                                         for (var k = 0; k < allRoles.length; k++) {
                                             if (allRoles[k].RoleId == selected[l]) {
                                                 row.Roles.push(allRoles[k].RoleDisplayName);
@@ -143,7 +145,7 @@ function getRolesApiCall(success_callback) {
 }
 
 function createUserRolesTable(username, roles, tableBody) {
-     tableBody.empty();
+    tableBody.empty();
      for (var j = 0; j < roles.length; j++) {
         tableBody.append(
             '<tr>' +
