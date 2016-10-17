@@ -39,19 +39,6 @@ function showAllRolesApiCall() {
                     });
                 })(row, i)
             }
-            //$('#addRole-btn').off().on('click', function () {
-            //    getRolesApiCall(function (response) {
-            //        var formbody = $('#allRolesCheckbox-form');
-            //        formbody.empty();
-            //        for (var i = 0; i < response.roleList.length; i++) {
-            //            var r = response.roleList[i];
-            //            formbody.append(
-            //               '<label for="allRolesCheckbox' + i + '">' + r.RoleName + '</label>' +
-            //               '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
-            //            );
-            //        }
-            //    });
-            //});
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR, textStatus, errorThrown);
@@ -101,16 +88,6 @@ function createRolePermissionsTable(role, tableBody, headerElement) {
                 '</tr>');
         }
     });
-        //(function (index) {
-        //    $('#removePermission' + index + '-btn').on('click', function () {
-        //        $('#removePermissionYes-btn').off().on('click', function () {
-        //            removeUsersFromRolesApiCall([username], [roles[index]], kentico_site_name, function (response) {
-        //                roles.splice(index, 1);
-        //                createUserRolesTable(username, roles, tableBody);
-        //            });
-        //        });
-        //    });
-        //})(i);
 }
 
 function deleteRoleApiCall(roleId, success_callback) {
@@ -130,3 +107,108 @@ function deleteRoleApiCall(roleId, success_callback) {
         }
     });
 }
+
+function CreateNewRoleApiCall(roleName, roleDisplayName, success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: authorization_api_url + "create-new-role",
+        type: 'POST',
+        dataType: "json",
+        data: {
+            roleName: roleName,
+            roleDisplayName: roleDisplayName,
+        },
+        success: function (data) {
+            if (success_callback) success_callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
+function getAllPermissionsApiCall(success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: authorization_api_url + "get-all-permissions",
+        type: 'GET',
+        success: function (data) {
+            if (success_callback) success_callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
+function createAllPermissionsCheckboxTable(tableBody, headerElement, text) {   
+    tableBody.empty();
+    if (headerElement != null && text != null) {
+        $('#' + headerElement).html(text);
+    }
+    getAllPermissionsApiCall(function (result) {
+        var permissions = result.permissionList;
+        for (var i = 0; i < permissions.length; i++) {
+            var r = permissions[i];
+            tableBody.append(
+                '<tr>' +
+                    '<td class="td-first"><span class="permission-name">' + r.PermissionDisplayName +
+                    " - " + r.PermissionDescription +
+                    '</span></td>' +
+                    '<td class="td-second">' +
+                    '<input type="checkbox" name="allPermissions" id="allPermissionsCheckbox' + i + '" value="' + r.PermissionId + '" class="pull-right"><br>' +                    
+                    '</td>' +
+                '</tr>');
+            $('#createNewRole-btn').off().on('click', function () {
+                //create the role with to obtain it's Id
+                var newRoleDisplayName = $('#newRoleDisplayName-input').val();
+                var newRoleName = $('#newRoleName-input').val();
+                //get the checked permissions to the new role
+                var selected = [];
+                $('#allPermissionsCheckbox-table input:checked').each(function () {
+                    selected.push($(this).val());
+                });
+                CreateNewRoleApiCall(newRoleName, newRoleDisplayName, function (data) {
+                    //assign the selected Premissions
+                    assignPermissionsToRolesApiCall([data.newRoleId], selected);
+                    //Clear the form
+                    $('#newRoleDisplayName-input').val('');
+                    $('#newRoleName-input').val('');
+                    $('#allPermissionsCheckbox-table input:checked').each(function () {
+                        $(this).prop('checked', false);
+                    });
+                });
+                
+          });
+        }
+    });
+}
+
+function assignPermissionsToRolesApiCall(roleIds, permissionIds, success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: authorization_api_url + "assign-permissions-to-roles",
+        type: 'POST',
+        dataType: "json",
+        data: {
+            roleIds: roleIds,
+            permissionIds: permissionIds,
+        },
+        success: function (data) {
+            if (success_callback) success_callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            hideCustomLoadingMessage();
+        }
+    });
+}
+

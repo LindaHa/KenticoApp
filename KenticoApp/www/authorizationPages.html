@@ -22,7 +22,6 @@
 				<tr>
 					<th></th>
 					<th></th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody id="showAllRoles-table"></tbody>
@@ -33,7 +32,7 @@
 	</div>
 
 	<footer data-role="footer" data-position="fixed">
-		<a href="#" class="full-width no-side-padding ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add Role</a>
+		<a href="#createNewRole-page" class="full-width no-side-padding ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add Role</a>
 		<h4>Kentico</h4>
 	</footer>
 </div>
@@ -46,7 +45,7 @@
 			<ul>
 				<li><a href="#menu-page" class="ui-btn">Menu</a></li>
 				<li><a href="#authorization-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Roles</a></li>
-				<li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Edit Role</a></li>
+				<li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">View Role</a></li>
 
 			</ul>
 		</div>
@@ -69,16 +68,7 @@
 				</tr>
 			</thead>
 			<tbody id="permissionsOfRole-table">
-				<tr>
-					<td class="td-first">restart system</td>
-					<td class="td-second">
-						<a href="#removePermission-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-notext pull-right ui-mini">Remove Permission</a><br>
-						<div data-role="popup" id="removePermission-popup">
-							<h2>Are you sure you want to remove this permission?</h2>
-							<a href="#" class="ui-btn ui-btn-icon-left  ui-corner-all ui-icon-check ui-btn-inline">Yes</a>
-							<a href="#" data-rel="back" class="ui-btn ui-btn-icon-left ui-icon-delete ui-btn-inline  ui-corner-all pull-right">No</a>
-						</div>
-					</td>
+				<tr>					
 				</tr>
 			</tbody>
 		</table>
@@ -91,4 +81,61 @@
 		<a href="#" id="addPermissino-btn" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add permission</a>			
 		<h4>Kentico</h4>
 	</footer>
+</div>
+
+
+<div data-role="page" id="createNewRole-page">
+    <div data-role="header" class="header">
+        <h1 id="app-title">Administration App</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#menu-page" class="ui-btn">Menu</a></li>
+                <li><a href="#authorization-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Roles</a></li>
+                <li><a href="#viewRole-page" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">View Role</a></li>
+                <li><a href="#" class="ui-btn ui-btn-active ui-btn-icon-left ui-icon-carat-r">Create Role</a></li>
+
+            </ul>
+        </div>
+        <div class="push-down">
+            <div data-role="controlgroup" data-type="horizontal" class="pull-right">
+                <a href="#userView-page" class="user-profile-btn ui-btn ui-icon-user ui-btn-icon-left">User</a>
+                <a href="#logout-popup" data-rel="popup" class="ui-btn ui-icon-power ui-btn-icon-left">Log out</a>
+            </div>
+        </div>
+    </div>
+
+    <div role="main" class="ui-content">
+        <h1>Create a role: </h1>
+        <div>
+            <form class="push-down">
+                <div class="ui-field-contain">
+                    <label for="newRoleName">Role Name:</label>
+                    <input id="newRoleName-input" name="roleName" placeholder="Role Name" required />
+                    <label for="newRoleDisplayName">Role Display Name:</label>
+                    <input id="newRoleDisplayName-input" name="roleDisplayName" placeholder="Role Display Name" required />
+                    <label for="newRolePermissions">Role Permissions:</label>
+                    <h4 id="permissionText-h4"></h4>
+                    <table data-role="table" class="two-side-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="allPermissionsCheckbox-table">
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+
+        <div id="error-msg" class="not-displayed">
+        </div>
+    </div>
+
+    <footer data-role="footer" data-position="fixed">
+        <a href="#" id="createNewRole-btn" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Create</a>
+        <h4>Kentico</h4>
+    </footer>
 </div>

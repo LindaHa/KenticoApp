@@ -33,6 +33,8 @@ function onDeviceReady() {
         $.get("authorizationPages.html", function (data) {
             $("body").append(data); 
             $("#authorization-page").on("pageshow", showAllRolesApiCall);
+            $('#createNewRole-page').off().on('pageshow', createAllPermissionsCheckboxTable($("#allPermissionsCheckbox-table")))
+
         });
         
         //instantiate all global popups from index.html
