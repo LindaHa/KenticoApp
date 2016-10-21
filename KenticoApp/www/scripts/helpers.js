@@ -20,6 +20,8 @@ function showAjaxError(jqXHR, textStatus, errorThrown) {
         $('#errorPopup-text').text(errorThrown);
     } else if (typeof (textStatus) != "undefined") {
         $('#errorPopup-text').text(textStatus);
+    } else {
+        $('#errorPopup-text').text("Unknown Error!");
     }
     setTimeout(function () {
         $('#error-popup').popup('open');

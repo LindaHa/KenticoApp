@@ -32,7 +32,7 @@
 	</div>
 
 	<footer data-role="footer" data-position="fixed">
-		<a href="#createNewRole-page" class="full-width no-side-padding ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add Role</a>
+		<a href="#createNewRole-page" class="full-width no-side-padding ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add New Role</a>
 		<h4>Kentico</h4>
 	</footer>
 </div>
@@ -75,10 +75,25 @@
 
 		<div id="error-msg" class="not-displayed">
 		</div>
-</div>
+        <div data-role="popup" id="allPermissionsCheckbox-popup" class="scrollable-popup">
+            <fieldset data-role="controlgroup">
+                <p>Permissions:</p>
+                <table  data-role="table" class="two-side-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="allPermissionsCheckboxPopup-table">
+                    </table>
+                <button id="addSelectedPopupPermissions-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add selected permissions</button>
+            </fieldset>
+        </div>
+    </div>
 
 	<footer data-role="footer" data-position="fixed">			
-		<a href="#" id="addPermissino-btn" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add permission</a>			
+		<a href="#allPermissionsCheckbox-popup" id="addPermissions-btn" data-rel="popup" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Add permissions</a>			
 		<h4>Kentico</h4>
 	</footer>
 </div>
@@ -135,7 +150,7 @@
     </div>
 
     <footer data-role="footer" data-position="fixed">
-        <a href="#" id="createNewRole-btn" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Create</a>
+        <a href="#viewRole-page" id="createNewRole-btn" class="full-width no-side-padding ui-btn ui-icon-plus ui-btn-icon-left ui-btn ui-corner-all ui-shadow" style="font-weight:bold">Create</a>
         <h4>Kentico</h4>
     </footer>
 </div>

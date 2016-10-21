@@ -33,7 +33,29 @@ function onDeviceReady() {
         $.get("authorizationPages.html", function (data) {
             $("body").append(data); 
             $("#authorization-page").on("pageshow", showAllRolesApiCall);
-            $('#createNewRole-page').off().on('pageshow', createAllPermissionsCheckboxTable($("#allPermissionsCheckbox-table")))
+            $('#createNewRole-page').on('pageshow', function () {
+                createAllPermissionsCheckboxTable($('#allPermissionsCheckbox-table'), null, null, $('#createNewRole-btn'), function (selected) {
+                    //create the role with to obtain it's Id
+                    var newRoleDisplayName = $('#newRoleDisplayName-input').val();
+                    var newRoleName = $('#newRoleName-input').val();
+                    createNewRoleApiCall(newRoleName, newRoleDisplayName, function (data) {
+                        //assign the selected Premissions
+                        if (selected.length) {
+                            assignPermissionsToRolesApiCall([data.newRoleId], selected, function () {
+                                //Clear the form
+                                $('#newRoleDisplayName-input').val('');
+                                $('#newRoleName-input').val('');
+                                $('#allPermissionsCheckbox-table input:checked').each(function () {
+                                    $(this).prop('checked', false);
+                                });
+                                createRolePermissionsTable(data.newRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
+                            });
+                        }
+                        
+
+                    });
+                });
+            });
 
         });
         
@@ -43,6 +65,7 @@ function onDeviceReady() {
         $('#logout-popup').enhanceWithin().popup();
         $('#removeRole-popup').enhanceWithin().popup();
         $('#deleteRole-popup').enhanceWithin().popup();
+        $('#removePermission-popup').enhanceWithin().popup();
     });
 };
 

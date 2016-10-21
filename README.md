@@ -30,6 +30,8 @@ Working functionality
   
 2. Authorization
   1. Displaying all roles and their permissions
+  2. Creating a new role
+  3. Removing permissions from a role
   
 Future development
 =======================

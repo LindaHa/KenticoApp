@@ -47,7 +47,7 @@ function getAllUsersApiCall() {
                             $('#allRolesCheckbox-form input:checked').each(function () {
                                 selected.push($(this).val());
                             });
-                            AddUsersToRolesApiCall([row.Username], selected, kentico_site_name, function () {
+                            addUsersToRolesApiCall([row.Username], selected, kentico_site_name, function () {
                                 getRolesApiCall(function (response) {
                                     var allRoles = response.roleList;
                                     for (var l = 0; l < selected.length; l++) {
@@ -102,7 +102,7 @@ function removeUsersFromRolesApiCall(usernames, roleNames, siteName, success_cal
     });
 }
 
-function AddUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) {
+function addUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) {
     if (typeof (siteName) === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
