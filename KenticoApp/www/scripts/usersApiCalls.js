@@ -21,6 +21,8 @@ function getAllUsersApiCall() {
                     '</tr>');
                 (function (row, index) {
                     $('#editUser' + index + '-btn').on('click', function () {
+                        $('#editUserHeader-h1').html(row.UserId + ' : ' + row.Username);
+
                         $('#userIdEdit-input').val(row.UserId);
                         $('#usernameEdit-input').val(row.Username);
                         $('#nameEdit-input').val(row.FirstName);
@@ -28,7 +30,13 @@ function getAllUsersApiCall() {
 
                         var tablebody2 = $('#userRoles-table');
                         createUserRolesTable(row.Username, row.Roles, tablebody2);
-
+                        $('#saveEditUser-btn').off().on('click', function () {
+                            editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val());
+                        });
+                        $('#cancelEditUser-btn').off().on('click', function () {
+                            $('#nameEdit-input').val(row.FirstName);
+                            $('#surnameEdit-input').val(row.Surname);
+                        });
                         $('#addRole-btn').off().on('click', function(){
                             getRolesApiCall(function(response) {
                                 var formbody = $('#allRolesCheckbox-form');
@@ -130,7 +138,7 @@ function addUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) 
 function getRolesApiCall(success_callback) {
     showCustomLoadingMessage();
     $.ajax({
-        url: user_api_url + "get-roles",
+        url: authorization_api_url + "get-roles",
         type: 'GET',
         success: function (data) {
             if(success_callback) success_callback(data);
@@ -166,5 +174,27 @@ function createUserRolesTable(username, roles, tableBody) {
             });                                
         })(j);
     }
+}
+
+function editUserUsersApiCalls(username, firstName, surname, success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: user_api_url + "edit-user",
+        type: 'POST',
+        data: {
+            username: username,
+            firstName: firstName,
+            surname: surname,
+        },
+        success: function (data) {
+            if (success_callback) success_callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            hideCustomLoadingMessage();
+        }
+    });
 }
    

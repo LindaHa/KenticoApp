@@ -26,12 +26,13 @@ Working functionality
   
 2. Users
   1. Displaying users and their roles
-  2. Adding and removing roles from users
+  2. Adding and removing roles from users 
+  3. Changing the first and last name of the user + cancel changes
   
 2. Authorization
   1. Displaying all roles and their permissions
   2. Creating a new role
-  3. Removing permissions from a role
+  3. Removing and adding permissions from and to a role
   
 Future development
 =======================

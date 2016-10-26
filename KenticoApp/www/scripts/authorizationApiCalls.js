@@ -22,7 +22,7 @@ function getRole(roleId, success_callback) {
 function showAllRolesApiCall() {
     showCustomLoadingMessage();
     $.ajax({
-        url: user_api_url + "/get-roles",
+        url: authorization_api_url + "/get-roles",
         type: 'GET',
         success: function onResponse(response) {
             var $tablebody = $('#showAllRoles-table');
@@ -51,12 +51,14 @@ function showAllRolesApiCall() {
                 })(i);
                 (function (row2, index) {
                     $('#viewRole' + index + '-btn').on('click', function () {
-                        createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $("#roleName-h1"));
+                        createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $('#roleName-h1'));
                         $('#allPermissionsCheckbox-popup').on('popupafteropen', function () {
-                            createAllPermissionsCheckboxTable($('#allPermissionsCheckboxPopup-table', null, null, $('#addSelectedPopupPermissions-btn'), function (selected) {
-                                createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $("#roleName-h1"));
-                            }));
-                            
+                            createAllPermissionsCheckboxTable($('#allPermissionsCheckboxPopup-table'), null, null, $('#addSelectedPopupPermissions-btn'), function (selected) {
+                                assignPermissionsToRolesApiCall([row2.RoleId], selected, function () {
+                                    $('#allPermissionsCheckbox-popup').popup('close');
+                                    createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $('#roleName-h1'));
+                                });
+                            });                            
                         });
                     });
                 })(row, i);               
@@ -188,21 +190,31 @@ function getAllPermissionsApiCall(success_callback) {
 function createAllPermissionsCheckboxTable(tableBody, headerElement, text, button, on_click_selected_required) {   
     tableBody.empty();
     if (headerElement != null && text != null) {
-        $('#' + headerElement).html(text);
+        headerElement.html(text);
     }
     getAllPermissionsApiCall(function (result) {
         var permissions = result.permissionList;
         for (var i = 0; i < permissions.length; i++) {
             var r = permissions[i];
+            var description = r.PermissionDescription
+            if (description) {
+                description = r.PermissionDescription.substring(0, 30) + '...';
+            } 
             tableBody.append(
                 '<tr>' +
-                    '<td class="td-first"><span class="permission-name">' + r.PermissionDisplayName +
-                    " - " + r.PermissionDescription +
+                    '<td class="td-first"><span class="permission-name">'
+                         + r.PermissionDisplayName + " - " +
+                        '<a id = "permissionDescription' + i + '-a" href="#">' + description + '</a></td>' +
                     '</span></td>' +
                     '<td class="td-second">' +
-                    '<input type="checkbox" name="allPermissions" id="allPermissionsCheckbox' + i + '" value="' + r.PermissionId + '" class="pull-right"><br>' +                    
+                        '<input type="checkbox" name="allPermissions" id="allPermissionsCheckbox' + i + '" value="' + r.PermissionId + '" class="pull-right"><br>' +                    
                     '</td>' +
-                '</tr>');            
+                '</tr>');
+            (function(row, index){
+                $('permissionDescription' + index + '-a').on('click', function () {
+                    showTextPopup(row.PermissionDescription);
+                });
+            })(r, i)
                 button.off().on('click', function () {
                 //get the checked permissions to the new role
                 var selected = [];
