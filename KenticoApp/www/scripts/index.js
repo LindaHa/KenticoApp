@@ -14,6 +14,8 @@ function onDeviceReady() {
         
     //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
     $(document).ready(function () {
+        addListenersToLoginForm();
+
         $.get("systemPages.html", function (data) {
             $("body").append(data);
             //$("#system-page").on("pageshow", General information);
@@ -25,8 +27,7 @@ function onDeviceReady() {
 
         });
         $.get("usrsPages.html", function (data) {
-            $("body").append(data);             
-
+            $("body").append(data);   
             $("#users-page").on("pageshow", getAllUsersApiCall);
 
         });

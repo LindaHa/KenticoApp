@@ -2,6 +2,25 @@
 
 var user_api_url = system_api_domain + "/kenticoapi/users/";
 
+function viewCurrentUser() {
+    var user = getCurrentUserApiCall(function () {
+        $('#userView- page').on('show', function () {
+            $('#currentUserNameEdit-input').val(user.FirstName);
+            $('#currentUserSurnameEdit-input-input').val(user.LastName);
+            $('#currentUserUsrnameEdit-input-input').val(user.Username);
+            $('#currentUserPasswrdRepeat-input-input').val('');
+            $('#currentUserPasswrdRepeat-input-input').val('');
+         });       
+    });
+    $('#saveEditCurrentUser-btn').off().on('click', function () {
+        editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val());
+    });
+    $('#cancelEditCurrentUser-btn').off().on('click', function () {
+        $('#nameEdit-input').val(row.FirstName);
+        $('#surnameEdit-input').val(row.Surname);
+    });
+}
+
 function getAllUsersApiCall() {
     showCustomLoadingMessage();
     $.ajax({
