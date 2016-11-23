@@ -64,8 +64,7 @@
 	<div role="main" class="ui-content">
 		<h3>Edit User</h3>
         <h1 id="editUserHeader-h1"></h1>
-		<div>
-			<form class="push-down">
+		<div class="push-down">
 				<div class="ui-field-contain">
                     <input type="hidden" id="userIdEdit-input" />
                     <input type="hidden" id="usernameEdit-input"/>
@@ -94,7 +93,6 @@
                         <a href="#allRolesCheckbox-popup" data-rel="popup" id="addRole-btn" class="pull-right ui-btn ui-corner-all ui-btn-inline ui-shadow ui-icon-plus ui-btn-icon-left ui-mini ">Add role</a>
 					</div>
 				</div>
-			</form>		
             <div data-role="popup" id="allRolesCheckbox-popup" class="scrollable-popup">
                 <fieldset data-role="controlgroup">
                     <legend>Roles:</legend>
@@ -132,8 +130,8 @@
 					<input id="currentUserNameEdit-input" name="firstName" placeholder="name" required />
 					<label for="currentUserSurnameEdit">Surname:</label>
 					<input id="currentUserSurnameEdit-input" name="Surname" placeholder="surname" required />
-                    <label for="currentUserUsrnameEdit">Username:</label>
-                    <input id="currentUserUsrnameEdit-input" name="usrname" placeholder="Username" required />
+                    <!--<label for="currentUserUsrnameEdit">Username:</label>
+                    <input id="currentUserUsrnameEdit-input" name="usrname" placeholder="Username" required />-->
 					<label for="currentUserPasswrdEdit">Password:</label>
 					<input id="currentUserPasswrd-input" input type="password" name="passwrd" placeholder="Password" required />
                     <label for="currentUserPasswrdRepeatEdit">Repeat Password:</label>

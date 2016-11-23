@@ -17,10 +17,59 @@
 
 	<div role="main" class="ui-content">
 		<div id="system-big" class="ui-grid-b ui-responsive">
-			<div class="ui-block-a">
-				<h1>General information</h1>
-				<span>information</span>
-			</div>
+            <div class="ui-block-a">
+                <h1>General information</h1>
+                <table class="generalInformation-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Site Name: </p>
+                            </td>
+                            <td>
+                                <h3 class="siteName-h3"></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Site Display Name: </p>
+                            </td>
+                            <td>
+                                <h3 class="siteDisplayName-h3"></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Site Domain Name: </p>
+                            </td>
+                            <td>
+                                <h3 class="siteDomainName-h3"></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Site Last Modified: </p>
+                            </td>
+                            <td>
+                                <h3 class="siteLastModified-h3"></h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Licence Valid Till: </p>
+                            </td>
+                            <td>
+                                <h3 class="licenceValidTill-h3"></h3>
+                            <td>
+                        </tr>
+                    <tbody>
+                </table>
+            </div>
 			<div class="ui-block-b pull-right">
 				<a href="#clearCache-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Cache</a><br>
 				<a href="#cleanMemory-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clean Unused Memory</a><br>
@@ -30,9 +79,9 @@
 		</div>
 
 		<div id="system-small">
-			<div data-role="collapsible" class="push-down"  data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+			<div data-role="collapsible" id="generalInformation-collapsible" class="push-down"  data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 				<h1>General information</h1>
-				<table>
+				<table class="generalInformation-table">
                        <thead>
                             <tr>
                                 <th></th>
@@ -40,7 +89,26 @@
                             </tr>
                        </thead>
                     <tbody>
-
+                        <tr>
+                            <td>Site Name:</td>
+                            <td><h3 class="siteName-h3"></h3></td>
+                        </tr> 
+                        <tr>
+                            <td>Site Display Name:</td>
+                            <td><h3 class="siteDisplayName-h3"></h3></td>
+                        </tr>
+                        <tr>
+                            <td>Site Domain Name: </td>
+                            <td><h3 class="siteDomainName-h3"></h3></td>
+                        </tr>
+                        <tr>
+                            <td>Site Last Modified: </td>
+                            <td><h3 class="siteLastModified-h3"></h3></td>
+                        </tr>
+                        <tr>
+                            <td>License Valid Till: </td>
+                            <td><h3 class="licenceValidTill-h3"></h3></td>
+                        </tr>
                     </tbody>
                 </table>
 			</div>

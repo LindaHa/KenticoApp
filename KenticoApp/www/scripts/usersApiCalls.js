@@ -3,22 +3,24 @@
 var user_api_url = system_api_domain + "/kenticoapi/users/";
 
 function viewCurrentUser() {
-    var user = getCurrentUserApiCall(function () {
-        $('#userView- page').on('show', function () {
-            $('#currentUserNameEdit-input').val(user.FirstName);
-            $('#currentUserSurnameEdit-input-input').val(user.LastName);
-            $('#currentUserUsrnameEdit-input-input').val(user.Username);
-            $('#currentUserPasswrdRepeat-input-input').val('');
-            $('#currentUserPasswrdRepeat-input-input').val('');
-         });       
-    });
-    $('#saveEditCurrentUser-btn').off().on('click', function () {
-        editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val());
-    });
-    $('#cancelEditCurrentUser-btn').off().on('click', function () {
-        $('#nameEdit-input').val(row.FirstName);
-        $('#surnameEdit-input').val(row.Surname);
-    });
+    getCurrentUserApiCall(function (data) {
+        $('#currentUserUsername').text(data.UserName);
+        $('#currentUserNameEdit-input').val(data.FirstName);
+        $('#currentUserSurnameEdit-input').val(data.LastName);
+        //$('#currentUserPasswrdRepeat-input').val('');
+        //$('#currentUserPasswrdRepeat-input').val('');
+
+        $('#saveEditCurrentUser-btn').off().on('click', function () {
+            editUserUsersApiCalls(data.UserName, $('#currentUserNameEdit-input').val(), $('#currentUserSurnameEdit-input').val(), function () {
+                data.FirstName = $('#currentUserNameEdit-input').val();
+                data.LastName = $('#currentUserSurnameEdit-input').val();
+            });
+        });
+        $('#cancelEditCurrentUser-btn').off().on('click', function () {
+            $('#currentUserNameEdit-input').val(data.FirstName);
+            $('#currentUserSurnameEdit-input').val(data.LastName);
+        });
+    });    
 }
 
 function getAllUsersApiCall() {
@@ -50,7 +52,10 @@ function getAllUsersApiCall() {
                         var tablebody2 = $('#userRoles-table');
                         createUserRolesTable(row.Username, row.Roles, tablebody2);
                         $('#saveEditUser-btn').off().on('click', function () {
-                            editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val());
+                            editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val(), function () {
+                                row.FirstName = $('#nameEdit-input').val();
+                                row.Surname = $('#surnameEdit-input').val();
+                            });
                         });
                         $('#cancelEditUser-btn').off().on('click', function () {
                             $('#nameEdit-input').val(row.FirstName);

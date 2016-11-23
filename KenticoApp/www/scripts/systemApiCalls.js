@@ -19,9 +19,51 @@ function restartServerApiCall() {
         }
     });
 }
-                            
+        
+function getGeneralInformationApiCall(success_callback) {
+    showCustomLoadingMessage();
+    $.ajax({
+        url: system_api_url + "show-general-information",
+        type: 'GET',
+        success: function (data) {
+            if (success_callback) success_callback(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            showAjaxError(jqXHR);
+        },
+        complete: function () {
+            hideCustomLoadingMessage();
+        }
+    });
+}
+
+function addListenerToGeneralInfoCollapsible() {
+    $('#generalInformation-collapsible').bind('collapsibleexpand', function () {
+         getGeneralInformationApiCall(function (data) {
+        $('.siteName-h3').text(data.siteName);
+        $('.siteDisplayName-h3').text(data.siteDisplayName);
+        $('.siteDomainName-h3').text(data.siteDomainName);
+        $('.siteLastModified-h3').text(data.siteLastModified);
+        $('.licenceValidTill-h3').text(data.licenseExpiration);
+        });
+    })
+
+    //$('#generalInformation-collapsible').collapsible({
+    //    expand: function () {
+    //        getGeneralInformationApiCall(function (data) {
+    //            $('.siteName-h3').text(data.siteName);
+    //            $('.siteDisplayName-h3').text(data.siteDisplayName);
+    //            $('.siteDomainName-h3').text(data.siteDomainName);
+    //            $('.siteLastModified-h3').text(data.siteLastModified);
+    //            $('.licenceValidTill-h3').text(data.licenseExpiration);
+    //        });
+    //    }
+    //});
+}
+
 function showEventlogApiCall() {
     showCustomLoadingMessage();
+    console.log(access_token);
     $.ajax({
         url: system_api_url + "show-eventlog",
         type: 'GET',
