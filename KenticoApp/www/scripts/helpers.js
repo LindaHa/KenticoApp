@@ -14,7 +14,10 @@ function hideCustomLoadingMessage() {
 }
 
 function showAjaxError(jqXHR, textStatus, errorThrown) {
-    if (jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.errorMessage) {
+    if (jqXHR && jqXHR.status == 403) {
+        $.mobile.changePage("#welcome-page");
+        $('#errorPopup-text').text("You need to be logged in as a GLOBAL ADMINISTRATOR.");
+    } else if (jqXHR && jqXHR.responseJSON && jqXHR.responseJSON.errorMessage) {
         $('#errorPopup-text').text(jqXHR.responseJSON.errorMessage);
     } else if(typeof(errorThrown) != "undefined"){
         $('#errorPopup-text').text(errorThrown);

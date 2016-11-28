@@ -29,7 +29,7 @@ Working functionality
   1. Displaying users and their roles
   2. Adding and removing roles from users 
   3. Changing the first and last name of the current user and other users + cancel changes
-  4. Login and set current user
+  4. Login and Logout
   
 2. Authorization
   1. Displaying all roles and their permissions
@@ -40,3 +40,5 @@ Future development
 =======================
 1. A dropdown with sitenames so it doesn't have to be hardcoded
 2. A secure way to generate accsess-tokens
+3. User UI polish
+4. Improve architecture to follow all REST principles

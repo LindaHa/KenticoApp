@@ -63,20 +63,22 @@ function getAllUsersApiCall() {
                         });
                         $('#addRole-btn').off().on('click', function(){
                             getRolesApiCall(function(response) {
-                                var formbody = $('#allRolesCheckbox-form');
-                                formbody.empty();
+                                var table = $('#allRolesCheckbox-table');
+                                table.empty();
                                 for (var i = 0; i < response.roleList.length; i++) {
                                     var r = response.roleList[i];
-                                    formbody.append(
-                                       '<label for="allRolesCheckbox' + i + '">' + r.RoleDisplayName + '</label>' +
-                                       '<input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '">'
+                                    table.append(
+                                        '<tr>' +
+                                           '<td><label for="allRolesCheckbox' + i + '">' + r.RoleDisplayName + '</label></td>' +
+                                           '<td class="allRolesCheckboc-input"><input type="checkbox" name="allRoles" id="allRolesCheckbox' + i + '" value="' + r.RoleId + '"></td>' +
+                                        '</tr>'
                                     );
                                 }
                             });
                         });
                         $('#addSelectedRoles-btn').off().on('click', function () {
                             var selected = [];
-                            $('#allRolesCheckbox-form input:checked').each(function () {
+                            $('.allRolesCheckboc-input input:checked').each(function () {
                                 selected.push($(this).val());
                             });
                             addUsersToRolesApiCall([row.Username], selected, kentico_site_name, function () {

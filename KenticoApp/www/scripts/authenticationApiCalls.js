@@ -43,7 +43,7 @@ function authenticateUserApiCall(username, password, success_callback) {
     });
 }
 
-function signOutUserApiCall() {
+function signOutUserApiCall(success_callback) {
     showCustomLoadingMessage();
     $.ajax({
         url: authentication_api_url + "sign-out-user",
