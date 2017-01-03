@@ -23,6 +23,16 @@ function onDeviceReady() {
     $(document).ready(function () {
         addListenersToLoginForm();
         addListenersToLogoutBtn();
+        
+        $('#systemInfo-btn').on('click', function () {
+            showTextPopup('To view general system information or event log, to restart the system and clean unused memory or cache memory.');
+        });
+        $('#usrsInfo-btn').on('click', function () {
+            showTextPopup('To edit users');
+        });
+        $('#authorizationInfo-btn').on('click', function () {
+            showTextPopup('To create and edit roles');
+        });
 
         $.get("systemPages.html", function (data) {
             $("body").append(data);
@@ -34,7 +44,7 @@ function onDeviceReady() {
             $('#cleanUnusedMmryYes-btn').on('click', cleanUnusedMmryApiCall);
         });
 
-        $.get("usrsPages.html", function (data) {
+        $.get("usrsPages.html", function (data) {            
             $("body").append(data);   
             $("#users-page").on('pageshow', getAllUsersApiCall);            
             $('#userView-page').on('pageshow', viewCurrentUser);
@@ -48,19 +58,19 @@ function onDeviceReady() {
                     //create the role with to obtain it's Id
                     var newRoleDisplayName = $('#newRoleDisplayName-input').val();
                     var newRoleName = $('#newRoleName-input').val();
-                    createNewRoleApiCall(newRoleName, newRoleDisplayName, function (data) {
+                    createNewRoleApiCall(newRoleName, newRoleDisplayName, function (newRoleData) {
                         //assign the selected Premissions
                         if (selected.length) {
-                            assignPermissionsToRolesApiCall([data.newRoleId], selected, function () {
-                                //Clear the form
-                                $('#newRoleDisplayName-input').val('');
-                                $('#newRoleName-input').val('');
-                                $('#allPermissionsCheckbox-table input:checked').each(function () {
-                                    $(this).prop('checked', false);
-                                });
-                                createRolePermissionsTable(data.newRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
+                            assignPermissionsToRolesApiCall([newRoleData.newRoleId], selected, function () {                                
+                                createRolePermissionsTable(newRoleData.newRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
                             });
-                        }          
+                        }
+                        //Clear the form
+                        $('#newRoleDisplayName-input').val('');
+                        $('#newRoleName-input').val('');
+                        $('#allPermissionsCheckbox-table input:checked').each(function () {
+                            $(this).prop('checked', false);
+                        });
                     });
                 });
             });

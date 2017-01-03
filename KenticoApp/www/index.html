@@ -25,24 +25,18 @@
 		</div>
 
 		<div role="main" class="ui-content">
-			<a data-position-to="window">
+			<span data-position-to="window">
 				<img src="Kentico_logo.png" id="kentico_logo" alt="kentico_logo" style="width:280px">
-			</a>
+			</span>
 			<span class="push-down">
-				<label for="usrname">Username:</label>
-				<input id="usrname-input" name="usrname" placeholder="Username" required />
-				<label for="passwrd">Password:</label>
-				<input id="passwrd-input" input type="password" name="passwrd" placeholder="Password" required />
+				<label for="usrname-input">Username:</label>
+				<input id="usrname-input" placeholder="Username" required />
+				<label for="passwrd-input">Password:</label>
+				<input id="passwrd-input" input type="password" required />
 				<button id="login-btn" data-role="button" class="ui-btn ui-btn-inline ui-corner-all ui-shadow pull-right">Log in</button>
 			</span>
 
-			<!--<div>
-				<a href="#">Forgot Password</a>
-				<a id="register-btn" class="pull-right" href="#">Register</a>
-			</div>-->
-
-			<div id="error-msg" class="not-displayed">
-			</div>
+			<div id="error-msg" class="not-displayed"></div>
 		</div>
 
 		<footer data-role="footer" data-position="fixed">
@@ -69,30 +63,21 @@
 
 		<div role="main" class="ui-content">
 			<div>
-				<div data-role="controlgroup" data-type="horizontal">
+				<div data-role="controlgroup" data-type="horizontal" class="full-width">
 					<a href="#system-page" id="system-btn" class="ui-btn ui-shadow ui-corner-all">System</a>
-					<a href="#systemInfo-popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">System</a>
-					<div data-role="popup" id="systemInfo-popup">
-						<p>To view general system information, the event log, to restart the system, clean unused memory and cache memory.</p>
-					</div>
-				</div>
-
-				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#authorization-page" id="authorization-btn" class="ui-btn ui-btn-inline ui-shadow ui-corner-all">Authorization</a>
-					<a href="#authorizationInfo-popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Authentication</a>
-					<div data-role="popup" id="authorizationInfo-popup">
-						<p>To edit and add roles</p>
-					</div>
+					<a href="#" id="systemInfo-btn" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">System</a>					
 				</div>
 
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="#users-page" id="usrs-btn" class="ui-btn ui-btn-inline ui-shadow ui-corner-all">Users</a>
-					<a href="#usrsInfo-popup" data-rel="popup" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Users</a>
-					<div data-role="popup" id="usrsInfo-popup">
-						<p>To edit and add users</p>
-					</div>
+					<a href="#" id="usrsInfo-btn" data-rel="popup" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Users</a>					
 				</div>
 			</div>
+
+            <div data-role="controlgroup" data-type="horizontal">
+                <a href="#authorization-page" id="authorization-btn" class="ui-btn ui-btn-inline ui-shadow ui-corner-all">Authorization</a>
+                <a href="#" id="authorizationInfo-btn" data-rel="popup" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext">Authentication</a>
+            </div>
 
 			<div id="error-msg" class="not-displayed">
 			</div>

@@ -40,28 +40,18 @@ function showAllRolesApiCall() {
                         '</td>'+
                     '</tr>'
                 );
-                (function (index2) {
-                    $('#deleteRole' + index2 + '-btn').on('click', function () {
+                (function (index, row2) {
+                    $('#deleteRole' + index + '-btn').on('click', function () {
                         $('#deleteRoleYes-btn').off().on('click', function () {
-                            deleteRoleApiCall(response.roleList[index2].RoleId, function () {
-                                $('#rowOfRoles' + index2).remove();
+                            deleteRoleApiCall(response.roleList[index].RoleId, function () {
+                                $('#rowOfRoles' + index).remove();
                             });
                         });
                     });
-                })(i);
-                (function (row2, index) {
                     $('#viewRole' + index + '-btn').on('click', function () {
                         createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $('#roleName-h1'));
-                        $('#allPermissionsCheckbox-popup').on('popupafteropen', function () {
-                            createAllPermissionsCheckboxTable($('#allPermissionsCheckboxPopup-table'), null, null, $('#addSelectedPopupPermissions-btn'), function (selected) {
-                                assignPermissionsToRolesApiCall([row2.RoleId], selected, function () {
-                                    $('#allPermissionsCheckbox-popup').popup('close');
-                                    createRolePermissionsTable(row2, $('#permissionsOfRole-table'), $('#roleName-h1'));
-                                });
-                            });                            
-                        });
                     });
-                })(row, i);               
+                })(i, row);          
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -127,6 +117,14 @@ function createRolePermissionsTable(roleOrRoleId, tableBody, headerElement) {
                 });                
             })(i);
         }
+        $('#allPermissionsCheckbox-popup').off().on('popupafteropen', function () {
+            createAllPermissionsCheckboxTable($('#allPermissionsCheckboxPopup-table'), null, null, $('#addSelectedPopupPermissions-btn'), function (selected) {
+                assignPermissionsToRolesApiCall([roleOrRoleId.RoleId], selected, function () {
+                    $('#allPermissionsCheckbox-popup').popup('close');
+                    createRolePermissionsTable(roleOrRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
+                });
+            });
+        });
     });
 }
 
@@ -210,20 +208,20 @@ function createAllPermissionsCheckboxTable(tableBody, headerElement, text, butto
                         '<input type="checkbox" name="allPermissions" id="allPermissionsCheckbox' + i + '" value="' + r.PermissionId + '" class="pull-right"><br>' +                    
                     '</td>' +
                 '</tr>');
-            (function(row, index){
-                $('permissionDescription' + index + '-a').on('click', function () {
+            (function (row, index) {
+                $('#permissionDescription' + index + '-a').on('click', function () {
                     showTextPopup(row.PermissionDescription);
                 });
-            })(r, i)
-                button.off().on('click', function () {
-                //get the checked permissions to the new role
-                var selected = [];
-                tableBody.find('input:checked').each(function () {
-                    selected.push($(this).val());
-                });                
-                if (on_click_selected_required) on_click_selected_required(selected);
-          });
+            })(r, i);
         }
+        button.off().on('click', function () {
+            //get the checked permissions to the new role
+            var selected = [];
+            tableBody.find('input:checked').each(function () {
+                selected.push($(this).val());
+            });
+            if (on_click_selected_required) on_click_selected_required(selected);
+        });
     });
 }
 

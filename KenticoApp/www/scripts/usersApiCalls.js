@@ -11,7 +11,7 @@ function viewCurrentUser() {
         //$('#currentUserPasswrdRepeat-input').val('');
 
         $('#saveEditCurrentUser-btn').off().on('click', function () {
-            editUserUsersApiCalls(data.UserName, $('#currentUserNameEdit-input').val(), $('#currentUserSurnameEdit-input').val(), function () {
+            editUserUsersApiCall(data.UserName, $('#currentUserNameEdit-input').val(), $('#currentUserSurnameEdit-input').val(), function () {
                 data.FirstName = $('#currentUserNameEdit-input').val();
                 data.LastName = $('#currentUserSurnameEdit-input').val();
             });
@@ -52,7 +52,7 @@ function getAllUsersApiCall() {
                         var tablebody2 = $('#userRoles-table');
                         createUserRolesTable(row.Username, row.Roles, tablebody2);
                         $('#saveEditUser-btn').off().on('click', function () {
-                            editUserUsersApiCalls($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val(), function () {
+                            editUserUsersApiCall($('#usernameEdit-input').val(), $('#nameEdit-input').val(), $('#surnameEdit-input').val(), function () {
                                 row.FirstName = $('#nameEdit-input').val();
                                 row.Surname = $('#surnameEdit-input').val();
                             });
@@ -202,7 +202,7 @@ function createUserRolesTable(username, roles, tableBody) {
     }
 }
 
-function editUserUsersApiCalls(username, firstName, surname, success_callback) {
+function editUserUsersApiCall(username, firstName, surname, success_callback) {
     showCustomLoadingMessage();
     $.ajax({
         url: user_api_url + "edit-user",
