@@ -145,8 +145,32 @@ function deleteRoleApiCall(roleId, success_callback) {
         }
     });
 }
+function createNewRole() {
+    createAllPermissionsCheckboxTable($('#allPermissionsCheckbox-table'), null, null, $('#createNewRole-btn'), function (selected) {
+        //create the role with to obtain its Id
+        var newRoleDisplayName = $('#newRoleDisplayName-input').val();
+        var newRoleName = $('#newRoleName-input').val();
+        createNewRoleApiCall(newRoleName, newRoleDisplayName, function (newRoleData) {
+            //assign the selected Premissions
+            if (selected.length) {
+                assignPermissionsToRolesApiCall([newRoleData.newRoleId], selected, function () {
+                    createRolePermissionsTable(newRoleData.newRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
+                });
+            }
+            $.mobile.changePage("#viewRole-page");
+            //Clear the form
+            $('#newRoleDisplayName-input').val('');
+            $('#newRoleName-input').val('');
+            $('#allPermissionsCheckbox-table input:checked').each(function () {
+                $(this).prop('checked', false);
+            });
+        }, function () {
+            createNewRole;
+        });
+    });
+}
 
-function createNewRoleApiCall(roleName, roleDisplayName, success_callback) {
+function createNewRoleApiCall(roleName, roleDisplayName, success_callback, error_callback) {
     showCustomLoadingMessage();
     $.ajax({
         url: authorization_api_url + "create-new-role",
@@ -161,6 +185,7 @@ function createNewRoleApiCall(roleName, roleDisplayName, success_callback) {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR, textStatus, errorThrown);
+            if (error_callback) error_callback(jqXHR, textStatus, errorThrown);
         },
         complete: function () {
             hideCustomLoadingMessage();

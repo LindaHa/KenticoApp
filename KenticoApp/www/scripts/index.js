@@ -53,27 +53,7 @@ function onDeviceReady() {
         $.get("authorizationPages.html", function (data) {
             $("body").append(data); 
             $("#authorization-page").on("pageshow", showAllRolesApiCall);
-            $('#createNewRole-page').on('pageshow', function () {
-                createAllPermissionsCheckboxTable($('#allPermissionsCheckbox-table'), null, null, $('#createNewRole-btn'), function (selected) {
-                    //create the role with to obtain it's Id
-                    var newRoleDisplayName = $('#newRoleDisplayName-input').val();
-                    var newRoleName = $('#newRoleName-input').val();
-                    createNewRoleApiCall(newRoleName, newRoleDisplayName, function (newRoleData) {
-                        //assign the selected Premissions
-                        if (selected.length) {
-                            assignPermissionsToRolesApiCall([newRoleData.newRoleId], selected, function () {                                
-                                createRolePermissionsTable(newRoleData.newRoleId, $('#permissionsOfRole-table'), $('#roleName-h1'));
-                            });
-                        }
-                        //Clear the form
-                        $('#newRoleDisplayName-input').val('');
-                        $('#newRoleName-input').val('');
-                        $('#allPermissionsCheckbox-table input:checked').each(function () {
-                            $(this).prop('checked', false);
-                        });
-                    });
-                });
-            });
+            $('#createNewRole-page').on('pageshow', createNewRole);
         });
         
         //instantiate all global popups from index.html
