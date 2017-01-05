@@ -1,6 +1,7 @@
 ﻿"use strict";
 
-var system_api_domain = "http://localhost:8080";
+//var system_api_domain = "http://localhost:8080";
+var system_api_domain = "http://kenticocapi.azurewebsites.net";
 var kentico_site_name = "CorporateSite";
 var access_token = null;
 
@@ -11,8 +12,11 @@ function onDeviceReady() {
 
     $.ajaxSetup({
         beforeSend: function (xhr) {
-            if(access_token != null) xhr.setRequestHeader("AccessToken", access_token);
-        },
+            if (access_token !== null)
+            {
+                xhr.setRequestHeader("AccessToken", access_token);                
+            }
+        }
     });
 
     console.log('Ready');
@@ -23,7 +27,7 @@ function onDeviceReady() {
     $(document).ready(function () {
         addListenersToLoginForm();
         addListenersToLogoutBtn();
-        
+
         $('#systemInfo-btn').on('click', function () {
             showTextPopup('To view general system information or event log, to restart the system and clean unused memory or cache memory.');
         });
@@ -64,12 +68,12 @@ function onDeviceReady() {
         $('#deleteRole-popup').enhanceWithin().popup();
         $('#removePermission-popup').enhanceWithin().popup();
     });
-};
+}
 
 function onPause() {
     // TODO: This application has been suspended. Save application state here.
-};
+}
 
 function onResume() {
     // TODO: This application has been reactivated. Restore application state here.
-};
+}

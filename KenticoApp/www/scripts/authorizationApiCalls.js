@@ -33,10 +33,10 @@ function showAllRolesApiCall() {
                     '<tr id="rowOfRoles' + i + '">' +
                         '<td>' + row.RoleId + " : " + row.RoleDisplayName +'</td>' +
                         '<td class="td-second.special">' +
-						    '<a id="viewRole' + i + '-btn" href="#viewRole-page" class="viewRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-eye ui-shadow ui-btn-inline pull-right ui-mini"></a><br>' +
+                            '<a id="viewRole' + i + '-btn" href="#viewRole-page" class="viewRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-eye ui-shadow ui-btn-inline pull-right ui-mini"></a><br>' +
                         '</td>' +
                         '<td class="td-third">' +
-						    '<a id="deleteRole' + i + '-btn" data-rel="popup" href="#deleteRole-popup" class="deleteRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow ui-btn-inline pull-right ui-mini ui-btn-icon-notext"></a><br>' +
+                            '<a id="deleteRole' + i + '-btn" data-rel="popup" href="#deleteRole-popup" class="deleteRole-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow ui-btn-inline pull-right ui-mini ui-btn-icon-notext"></a><br>' +
                         '</td>'+
                     '</tr>'
                 );
@@ -90,7 +90,7 @@ function createRolePermissionsTable(roleOrRoleId, tableBody, headerElement) {
         return;
     } 
     tableBody.empty();
-    if (headerElement != null) {
+    if (headerElement !== null) {
         headerElement.html(roleOrRoleId.RoleId + ' : ' + roleOrRoleId.RoleDisplayName);
     }
     getRolePermissionsApiCall(roleOrRoleId.RoleId, function (result) {
@@ -178,7 +178,7 @@ function createNewRoleApiCall(roleName, roleDisplayName, success_callback, error
         dataType: "json",
         data: {
             roleName: roleName,
-            roleDisplayName: roleDisplayName,
+            roleDisplayName: roleDisplayName
         },
         success: function (data) {
             if (success_callback) success_callback(data);
@@ -212,14 +212,14 @@ function getAllPermissionsApiCall(success_callback) {
 
 function createAllPermissionsCheckboxTable(tableBody, headerElement, text, button, on_click_selected_required) {   
     tableBody.empty();
-    if (headerElement != null && text != null) {
+    if (headerElement !== null && text !== null) {
         headerElement.html(text);
     }
     getAllPermissionsApiCall(function (result) {
         var permissions = result.permissionList;
         for (var i = 0; i < permissions.length; i++) {
             var r = permissions[i];
-            var description = r.PermissionDescription
+            var description = r.PermissionDescription;
             if (description) {
                 description = r.PermissionDescription.substring(0, 30) + '...';
             } 
@@ -258,7 +258,7 @@ function assignPermissionsToRolesApiCall(roleIds, permissionIds, success_callbac
         dataType: "json",
         data: {
             roleIds: roleIds,
-            permissionIds: permissionIds,
+            permissionIds: permissionIds
         },
         success: function (data) {
             if (success_callback) success_callback(data);
@@ -280,7 +280,7 @@ function unassignPermissionsFromRolesApiCall(roleIds, permissionIds, success_cal
         dataType: "json",
         data: {
             roleIds: roleIds,
-            permissionIds: permissionIds,
+            permissionIds: permissionIds
         },
         success: function (data) {
             if (success_callback) success_callback(data);

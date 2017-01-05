@@ -39,14 +39,19 @@ function getGeneralInformationApiCall(success_callback) {
 
 function addListenerToGeneralInfoCollapsible() {
     $('#generalInformation-collapsible').bind('collapsibleexpand', function () {
-         getGeneralInformationApiCall(function (data) {
-        $('.siteName-h3').text(data.siteName);
-        $('.siteDisplayName-h3').text(data.siteDisplayName);
-        $('.siteDomainName-h3').text(data.siteDomainName);
-        $('.siteLastModified-h3').text(data.siteLastModified);
-        $('.licenceValidTill-h3').text(data.licenseExpiration);
+        getGeneralInformationApiCall(function (data) {
+            $('.serverName-h3').text(data.serverName);
+            $('.serverURL-h3').text(data.serverURL);
+            $('.serverLastModified-h3').text(data.serverLastModified);
+            $('.serverLastStart-h3').text(data.serverLastStart);
+            $('.virtualMemory-h3').text(data.virtualMemory);
+            $('.peakWorkingSetSize-h3').text(data.workingPeak);
+            $('.siteName-h3').text(data.siteName);
+            $('.siteDomainName-h3').text(data.siteDomainName);
+            $('.siteLastModified-h3').text(data.siteLastModified);
+            $('.licenceValidTill-h3').text(data.licenseExpiration);
         });
-    })
+    });
 
     //$('#generalInformation-collapsible').collapsible({
     //    expand: function () {
@@ -74,20 +79,20 @@ function showEventlogApiCall() {
                 var r = response.eventList[i];
                 $tablebody.append(
                     '<tr>' +
-					    '<td>' + r.EventID + '</td>' +
-					    '<td>' + r.EventTime + '</td>' +
-					    '<td>' + r.EventCode + '</td>' +
-					    '<td>' + r.EventMachineName + '</td>' +
-					    '<td>' + r.EventType + '</td>' +
+                        '<td>' + r.EventID + '</td>' +
+                        '<td>' + r.EventTime + '</td>' +
+                        '<td>' + r.EventCode + '</td>' +
+                        '<td>' + r.EventMachineName + '</td>' +
+                        '<td>' + r.EventType + '</td>' +
                         (r.EventDescription.toString().length < 16 ?
                         '<td>' + r.EventDescription + '</td>' :
                         '<td><a id="eventDescription' + i + '-a">' + r.EventDescription.substring(0,15) + '...</a></td>') +
-				    '</tr>');
+                    '</tr>');
                 (function (row, index) {
                     $('#eventDescription' + index + '-a').on('click', function () {
                         showTextPopup(row.EventDescription);
                     });
-                })(r, i)
+                })(r, i);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

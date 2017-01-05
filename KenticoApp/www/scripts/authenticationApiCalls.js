@@ -1,4 +1,4 @@
-﻿"use strict"
+﻿"use strict";
 
 var authentication_api_url = system_api_domain + "/kenticoapi/authentication/";
 
@@ -22,17 +22,21 @@ function getCurrentUserApiCall(success_callback) {
 function authenticateUserApiCall(username, password, success_callback) {
     showCustomLoadingMessage();
     access_token = null;
+    $('.user-profile-btn').text('Dearest');
     $.ajax({
         url: authentication_api_url + "authenticate-user",
         type: 'POST',
         dataType: "json",
         data: {
             username: username,
-            password: password,
+            password: password
         },
         success: function (data) {
             access_token = data.token.Code;
             if (success_callback) success_callback(data);
+            getCurrentUserApiCall(function (data) {
+                $('.user-profile-btn').text(data.UserName);
+            });
         },
         error: function (jqXHR, textStatus, errorThrown) {
             showAjaxError(jqXHR, textStatus, errorThrown);

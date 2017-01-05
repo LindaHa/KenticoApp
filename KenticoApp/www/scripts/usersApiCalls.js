@@ -35,7 +35,7 @@ function getAllUsersApiCall() {
                 var r = response.usersList[i];
                 $tablebody.append(
                     '<tr>' +
-					    '<td class="td-first">' + r.UserId + ' : ' + r.Username + '</td>' +
+                        '<td class="td-first">' + r.UserId + ' : ' + r.Username + '</td>' +
                         '<td class="td-second">' +
 						'<a id="editUser' + i + '-btn" href="#editUser-page" class="editUser-btn ui-btn ui-corner-all ui-btn-icon-notext ui-icon-edit ui-shadow ui-btn-inline pull-right ui-mini">Edit User</a><br>' +
                         '</td>'+
@@ -61,8 +61,8 @@ function getAllUsersApiCall() {
                             $('#nameEdit-input').val(row.FirstName);
                             $('#surnameEdit-input').val(row.Surname);
                         });
-                        $('#addRole-btn').off().on('click', function(){
-                            getRolesApiCall(function(response) {
+                        $('#addRole-btn').off().on('click', function () {
+                            getRolesApiCall(function (response) {
                                 var table = $('#allRolesCheckbox-table');
                                 table.empty();
                                 for (var i = 0; i < response.roleList.length; i++) {
@@ -86,7 +86,7 @@ function getAllUsersApiCall() {
                                     var allRoles = response.roleList;
                                     for (var l = 0; l < selected.length; l++) {
                                         for (var k = 0; k < allRoles.length; k++) {
-                                            if (allRoles[k].RoleId == selected[l]) {
+                                            if (allRoles[k].RoleId === selected[l]) {
                                                 row.Roles.push(allRoles[k].RoleDisplayName);
                                                 break;
                                             }
@@ -98,7 +98,7 @@ function getAllUsersApiCall() {
                         });
 
                     });
-                })(r, i)
+                })(r, i);
 
             }
         },
@@ -112,7 +112,7 @@ function getAllUsersApiCall() {
 }
 
 function removeUsersFromRolesApiCall(usernames, roleNames, siteName, success_callback) {
-    if (typeof (siteName) === "undefined") siteName = kentico_site_name;
+    if (typeof siteName === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
         url: user_api_url + "remove-users-from-roles",
@@ -137,7 +137,7 @@ function removeUsersFromRolesApiCall(usernames, roleNames, siteName, success_cal
 }
 
 function addUsersToRolesApiCall(usernames, roleIds, siteName, success_callback) {
-    if (typeof (siteName) === "undefined") siteName = kentico_site_name;
+    if (typeof siteName === "undefined") siteName = kentico_site_name;
     showCustomLoadingMessage();
     $.ajax({
         url: user_api_url + "add-users-to-roles",
@@ -210,7 +210,7 @@ function editUserUsersApiCall(username, firstName, surname, success_callback) {
         data: {
             username: username,
             firstName: firstName,
-            surname: surname,
+            surname: surname
         },
         success: function (data) {
             if (success_callback) success_callback(data);
