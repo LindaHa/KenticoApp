@@ -1,4 +1,5 @@
-﻿<div data-role="page" id="system-page">
+﻿<!--this page displays buttons with the "system" functionality and a collapsible element to show general information-->
+<div data-role="page" id="system-page">
 	<div data-role="header" class="header">
 		<h1 id="app-title">Administration App</h1>
 		<div data-role="navbar">
@@ -16,6 +17,7 @@
 	</div>
 
 	<div role="main" class="ui-content">
+        <!--this element is displayd if the screen's width is more than 560px-->
 		<div id="system-big" class="ui-grid-b ui-responsive">
             <div class="ui-block-a">
                 <h1>General information</h1>
@@ -78,6 +80,7 @@
 			</div>
 		</div>
 
+        <!--this element is displayd if the screen's width is less than 561px-->
 		<div id="system-small">
 			<div data-role="collapsible" id="generalInformation-collapsible" class="push-down"  data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
 				<h1>General information</h1>
@@ -132,6 +135,7 @@
                     </tbody>
                 </table>
 			</div>
+            <!--popups-->
 			<div>
 				<a href="#clearCache-popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow">Clear Cache</a><br>
 				<div data-role="popup" id="clearCache-popup" data-dismissible="false">
@@ -168,7 +172,7 @@
 
 </div>
 
-
+<!--this page displays the event-log-->
 <div data-role="page" id="systemEventlog-page">
     <div data-role="header" class="header">
         <h1 id="app-title">Administration App</h1>

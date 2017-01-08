@@ -1,7 +1,7 @@
 {
   "android": {
     "release": {
-      "keystore": "F:\\Linda\\School\\Kentico",
+      "keystore": "F:\\Linda\\School\\Kentico\\the-key.keystore",
       "storePassword": "lin12da",
       "alias": "Nefarion",
       "password": "lin12da",

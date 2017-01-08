@@ -25,6 +25,8 @@ function onDeviceReady() {
     document.addEventListener( 'resume', onResume.bind( this ), false );
     //// TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
     $(document).ready(function () {
+        //adds listeners to buttons and pages
+
         addListenersToLoginForm();
         addListenersToLogoutBtn();
 

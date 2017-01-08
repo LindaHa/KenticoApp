@@ -2,6 +2,9 @@
 
 var system_api_url = system_api_domain + "/kenticoapi/system/";
 
+//
+ // This function restarts the server.
+ //
 function restartServerApiCall() {
     showCustomLoadingMessage();
     $.ajax({
@@ -19,7 +22,11 @@ function restartServerApiCall() {
         }
     });
 }
-        
+
+//
+ // This function gets general information.
+ // param {success_callback} the function describes what is to happen if the call is succesful
+ //
 function getGeneralInformationApiCall(success_callback) {
     showCustomLoadingMessage();
     $.ajax({
@@ -37,9 +44,13 @@ function getGeneralInformationApiCall(success_callback) {
     });
 }
 
+//
+ // This function adds a listener to a collapsible element which displays general information.
+ //
 function addListenerToGeneralInfoCollapsible() {
     $('#generalInformation-collapsible').bind('collapsibleexpand', function () {
         getGeneralInformationApiCall(function (data) {
+            //fills the elements below with the inrormation
             $('.serverName-h3').text(data.serverName);
             $('.serverURL-h3').text(data.serverURL);
             $('.serverLastModified-h3').text(data.serverLastModified);
@@ -52,20 +63,11 @@ function addListenerToGeneralInfoCollapsible() {
             $('.licenceValidTill-h3').text(data.licenseExpiration);
         });
     });
-
-    //$('#generalInformation-collapsible').collapsible({
-    //    expand: function () {
-    //        getGeneralInformationApiCall(function (data) {
-    //            $('.siteName-h3').text(data.siteName);
-    //            $('.siteDisplayName-h3').text(data.siteDisplayName);
-    //            $('.siteDomainName-h3').text(data.siteDomainName);
-    //            $('.siteLastModified-h3').text(data.siteLastModified);
-    //            $('.licenceValidTill-h3').text(data.licenseExpiration);
-    //        });
-    //    }
-    //});
 }
 
+//
+ // This function get the event-log and displays it.
+ //
 function showEventlogApiCall() {
     showCustomLoadingMessage();
     console.log(access_token);
@@ -75,6 +77,7 @@ function showEventlogApiCall() {
         success: function (response) {
             var $tablebody = $('#eventlog-table');
             $tablebody.empty();
+            //fills the table with the events and information
             for (var i = 0; i < response.eventList.length; i++){
                 var r = response.eventList[i];
                 $tablebody.append(
@@ -88,6 +91,7 @@ function showEventlogApiCall() {
                         '<td>' + r.EventDescription + '</td>' :
                         '<td><a id="eventDescription' + i + '-a">' + r.EventDescription.substring(0,15) + '...</a></td>') +
                     '</tr>');
+                //adds a listener to the #eventDescription link, after clicking it a pop up with the whole event desctiption pops up 
                 (function (row, index) {
                     $('#eventDescription' + index + '-a').on('click', function () {
                         showTextPopup(row.EventDescription);
@@ -104,6 +108,9 @@ function showEventlogApiCall() {
     });
 }
 
+//
+ // This function clears cache memory.
+ //
 function clearCacheApiCall() {
     showCustomLoadingMessage();
     $.ajax({
@@ -122,6 +129,9 @@ function clearCacheApiCall() {
     });
 }
 
+//
+ // This function cleans unused memory.
+ //
 function cleanUnusedMmryApiCall() {
     showCustomLoadingMessage();
     $.ajax({
